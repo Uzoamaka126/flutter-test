@@ -1,4 +1,4 @@
-/* body */
+/********** BODY ***********/
 :root {
   --primaryColor: #f5a623;
   --darkColor: #333333;
@@ -25,7 +25,8 @@ input {
   -moz-appearance: none;
   appearance: none;
 }
-/* typography */
+
+/********** TYPOGRAPHY ***********/
 .text-md {
   font-size: 24px;
 }
@@ -108,7 +109,7 @@ p {
   line-height: 1.5;
 }
 
-/* container layouts */
+/********** CONTAINER LAYOUTS ***********/
 .container {
   width: 100%;
   padding-right: 20px;
@@ -124,7 +125,8 @@ p {
   margin-right: -15px;
   margin-left: -15px;
 }
-/* buttons */
+
+/********** BUTTONS ***********/
 button {
   outline: none;
   border: 0;
@@ -153,8 +155,12 @@ button {
 }
 .button--primary--md {
   font-size: 12.2px;
-  padding: 11px 19px !important;
+  padding: 5px 14px !important;
   height: 36.6px;
+  width: 206px;
+  max-width: 206px;
+  letter-spacing: 0.508366px;
+  filter: drop-shadow(0px 1.01673px 1.01673px rgba(0, 0, 0, 0.5));
 }
 .button-round {
   background: var(--whiteColor);
@@ -166,7 +172,7 @@ button {
   color: var(--darkColor);
 }
 
-/* cards */
+/********** CARDS ***********/
 .cards-single--events {
   height: 231px;
   max-width: 400px;
@@ -174,7 +180,7 @@ button {
   border-radius: 6px;
 }
 
-/* header */
+/********** HEADER ***********/
 .header {
   position: fixed;
   width: 100%;
@@ -182,7 +188,6 @@ button {
   left: 0;
   top: 0px;
   background: var(--whiteAlt);
-  box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.05);
   z-index: 99;
 }
 
@@ -192,6 +197,16 @@ button {
   display: block;
   padding-left: 60px;
   padding-right: 60px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right a:first-of-type {
+  margin-right: 38px;
 }
 
 .nav--icon a,
@@ -225,10 +240,10 @@ button {
   width: auto;
 }
 
-.kuda-brand,
-.kuda-account {
+.nav-brand {
   min-width: 100px;
 }
-/* footer */
 
-/* others */
+/********** FOOTER ***********/
+
+/********** PROFILE IMAGE ***********/
