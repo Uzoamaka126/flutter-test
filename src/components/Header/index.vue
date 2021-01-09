@@ -2,7 +2,7 @@
   <div class="header">
     <div class="flex justify-between align-center column--100 header--wrap">
       <div class="nav-brand">
-        <img src="../../assets/img/Logo.svg" />
+        <img src="../../assets/img/Logo.svg" alt="flutterwave logo image" />
       </div>
       <div class="nav-right">
         <router-link to="/no-tickets" class="">

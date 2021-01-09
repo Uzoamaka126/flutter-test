@@ -1,5 +1,7 @@
 <template>
-  <AllEvents />
+ <div id="app">
+    <AllEvents />
+ </div>
 </template>
 
 <script>
@@ -17,6 +19,8 @@ export default {
 @import "./assets/css/styles.css";
 @import "./assets/css/misc.css";
 @import "./assets/css/media.css";
+@import "./assets/css/normalise.css";
+
 
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
