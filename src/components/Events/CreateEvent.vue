@@ -21,7 +21,7 @@
 export default {
   name: 'CreateEvent',
   props: {
-    msg: String
+    
   }
 }
 </script>
