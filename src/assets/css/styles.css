@@ -1,0 +1,157 @@
+/* body */
+:root {
+  --primaryColor: #f5a623;
+  --blackColor: #333333;
+  --whiteColor: #ffffff;
+}
+html {
+  scroll-behavior: smooth;
+}
+html,
+body {
+  font-family: "Muli", sans-serif;
+  font-size: 16px;
+  color: var(--textColor);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  /* Remove First */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+/* typography */
+.text-md {
+  font-size: 24px;
+}
+.text-xs {
+  font-size: 14px;
+  line-height: 28px;
+}
+.text-xxs {
+  font-size: 12px;
+}
+.color-dark {
+  color: #333333;
+}
+.color-dark--2 {
+  color: #12122c;
+}
+.color-grey {
+  color: #4f4f4f;
+}
+.color-grey--2 {
+  color: #4a4a4a;
+}
+.color-grey--3 {
+  color: #828282;
+}
+.color-primary {
+  color: #f5a623;
+}
+.text-semi-bold {
+  font-weight: 600;
+}
+.text-bold {
+  font-weight: 700;
+}
+.text-xbold {
+  font-weight: 800;
+}
+.text-xlbold {
+  font-weight: 900;
+}
+.text-light {
+  font-weight: 300;
+}
+.text-normal {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 40px;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.4;
+}
+
+h3 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+h4 {
+  font-size: 1.42rem;
+  line-height: 1.5;
+}
+
+h5 {
+  font-size: 1.32rem;
+  line-height: 1.5;
+}
+
+h6 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* container layouts */
+.container {
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 580px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 785px;
+  }
+  .kuda-signup--container {
+    max-width: 957px !important;
+  }
+  .c-apps {
+    margin-top: 35px;
+  }
+}
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+/* buttons */
+
+/* cards */
+
+/* footer */
+
+/* others */
