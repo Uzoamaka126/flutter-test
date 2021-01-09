@@ -4,9 +4,14 @@
       <img v-bind:src="event.image" alt="image of an event here" />
     </div>
     <div class="event-content--wrap">
-      <p>{{ event.date }}</p>
-      <h6 class="text-bold">{{ event.title }}</h6>
-      <p>{{ event.price }}</p>
+      <p class="color-grey text-capitalize text-xxs">{{ event.date }}</p>
+      <h6 class="text-bold color-dark">{{ event.title }}</h6>
+      <p
+        class="text-normal"
+        :class="{ 'color-green': isFree, 'color-grey': !isFree, 'color-red': !isAvailable }"
+      >
+        {{ isAvailable ? event.price: "Sold out" }}
+      </p>
     </div>
   </div>
 </template>
@@ -14,9 +19,14 @@
 <script>
 export default {
   name: "SingleEvent",
-  components: {},
   props: {
     event: Object,
+  },
+  data() {
+ return {
+     isFree: this.event.isFree,
+     isAvailable: this.event.isAvailable
+ }
   },
   created() {
       this.reversedMessage()
