@@ -5,6 +5,7 @@
   --whiteColor: #ffffff;
   --greenColor: #219653;
   --redColor: #eb5757;
+  --bodyColor: #F2F2F2;
 }
 html {
   scroll-behavior: smooth;
@@ -14,6 +15,7 @@ body {
   font-family: "Muli", sans-serif;
   font-size: 16px;
   color: var(--textColor);
+  background: var(--bodyColor);
 }
 
 body {
@@ -506,7 +508,7 @@ button {
 
 .event-page--wrap {
   width: 100%;
-  padding: 0px 150px;
+  margin: auto;
 }
 
 .event-page--wrap > div {
@@ -514,12 +516,13 @@ button {
   margin: 0 auto;
 }
 
-.event-page--info {
+.event-page--info, .event-info--others {
   max-width: 50%;
   width: 50%;
   margin-top: 50px;
 }
-.event-info--others {
+
+.event-info--others.left div:nth-child(1) {
   max-width: 370px;
   width: 370px;
 }
@@ -535,4 +538,9 @@ button {
 .event-page--info.right img {
   width: 100%;
   height: 100%;
+}
+.event-info--others.right div:nth-child(1) {
+  /* max-width: 370px;
+  width: 370px; */
+  margin-left: 10px;
 }

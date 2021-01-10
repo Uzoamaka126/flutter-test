@@ -35,22 +35,43 @@
                   <img src="../../assets/img/event-image.png" />
                 </div>
               </div>
-              <div class="divider mt-5 mb-5"></div>
-              <div class="event-page--others flex">
+              <div class="divider mt-5 mb-3"></div>
+              <div class="event-page--others flex justify-between">
                 <div class="event-info--others left">
-                  <h6 class="text-capitalize color-dark--2 text-normal">
-                    Venue
-                  </h6>
-                  <p class="text-normal text-md color-dark--2 mt-3">
-                    Eko Atlantic Beach, Off Ahmadu Bello way, Victoria Island,
-                    Lagos.
-                  </p>
-                  <div class="flex align-center mt-4">
-                    <img src="../../assets/img/map.svg" />
-                    <h6 class="ml-1 color-primary text-normal">View map for directions</h6>
+                  <div>
+                    <h6 class="text-capitalize color-dark--2 text-normal">
+                      Venue
+                    </h6>
+                    <p class="text-normal text-md color-dark--2 mt-3">
+                      Eko Atlantic Beach, Off Ahmadu Bello way, Victoria Island,
+                      Lagos.
+                    </p>
+                    <div class="flex align-center mt-4">
+                      <img src="../../assets/img/map.svg" />
+                      <h6 class="ml-1 color-primary text-normal">
+                        View map for directions
+                      </h6>
+                    </div>
                   </div>
                 </div>
-                <div class="event-info--others right"></div>
+                <div class="event-info--others right">
+                  <div>
+                    <h6 class="text-capitalize color-dark--2 text-normal">
+                      DATE AND TIME
+                    </h6>
+                    <p class="text-normal text-md color-dark--2 mt-3">
+                      Friday, February 8th 2019, 10:00pm
+                    </p>
+                    <div class="event-social--wrap">
+                      <h6 class="text-capitalize color-dark--2 text-normal mt-3">
+                        SOCIAL LINKS
+                      </h6>
+                      <h6 class="color-dark--2 text-normal mt-3">http://www.nathanielcole.com</h6>
+                      <h6 class="color-dark--2 text-normal mt-1">https://twitter.com/nathanielcole</h6>
+                      <h6 class="color-dark--2 text-normal mt-1">https://instagram.com/nathanielcole/</h6>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
