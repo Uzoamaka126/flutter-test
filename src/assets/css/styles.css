@@ -16,9 +16,6 @@ body {
   font-size: 16px;
   color: var(--textColor);
   background: var(--bodyColor);
-}
-
-body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   height: 100vh;
@@ -48,13 +45,7 @@ a:active,
 a:hover {
   outline: 0;
 }
-abbr[title] {
-  border-bottom: none;
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  -moz-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -142,26 +133,6 @@ h1 {
   line-height: 40px;
 }
 
-h2 {
-  font-size: 2rem;
-  line-height: 1.4;
-}
-
-h3 {
-  font-size: 1.8rem;
-  line-height: 1.5;
-}
-
-h4 {
-  font-size: 1.42rem;
-  line-height: 1.5;
-}
-
-h5 {
-  font-size: 1.32rem;
-  line-height: 1.5;
-}
-
 h6 {
   font-size: 18px;
   line-height: 24px;
@@ -180,12 +151,12 @@ p {
   margin-right: auto;
   margin-left: auto;
 }
-/* .container {
+.container-fluid {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-} */
+}
 .row {
   display: -ms-flexbox;
   display: flex;
@@ -204,6 +175,7 @@ button {
   opacity: 0.73;
   pointer-events: none;
 }
+
 .button--primary {
   font-size: 14px;
   line-height: 0.8;
@@ -221,6 +193,10 @@ button {
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
+}
+
+.button--primary:hover, .button--primary--md:hover, .button-round:hover {
+    transform: translate3d(0px, -3px, 0px);
 }
 
 .button--primary--md {
@@ -241,6 +217,7 @@ button {
   font-size: 18px;
   box-shadow: rgba(0, 0, 0, 0.25);
   color: var(--darkColor);
+  filter: drop-shadow(-1px 2px 4px rgba(0, 0, 0, 0.25));
 }
 
 .button-full--width {
@@ -250,6 +227,17 @@ button {
 .button-md--width {
   width: 348px !important;
   max-width: 348px;
+}
+.button-quantity--xs {
+  background: var(--whiteColor);
+  border-radius: 60px;
+  height: 20px;
+  padding: 13px 30px;
+  font-size: 24px;
+  box-shadow: rgba(0, 0, 0, 0.25);
+  color: var(--darkColor);
+  filter: drop-shadow(-1px 2px 4px rgba(0, 0, 0, 0.25));
+  width: 20px !important;
 }
 /********** CARDS ***********/
 .cards-single--events {
@@ -289,32 +277,6 @@ button {
   margin-right: 38px;
 }
 
-.nav--icon a,
-.nav--icon p {
-  display: flex;
-  align-items: center;
-  margin-right: 55px;
-  color: var(--textColor);
-  font-size: 0.875rem;
-}
-
-.nav--icon a span,
-.nav--icon p span {
-  display: flex;
-}
-
-.nav--icon:last-child a,
-.nav--icon:last-child p {
-  margin-right: 0;
-  cursor: not-allowed;
-}
-
-.nav--icon svg {
-  margin-right: 10px;
-  width: 25px;
-  height: auto;
-}
-
 .nav-brand svg {
   height: 34px;
   width: auto;
@@ -333,7 +295,6 @@ button {
 }
 
 .page-entry {
-  /* overflow: hidden; */
   -webkit-overflow-scrolling: touch;
   height: 100%;
 }
@@ -354,13 +315,10 @@ button {
 }
 
 .page-preview {
-  transform: translateY(18px);
-  transition: transform 0.8s;
-}
-
-.page-preview {
   margin-top: 70px;
   padding: 63px 40px;
+  transform: translateY(18px);
+  transition: transform 0.8s;
 }
 .page--loader {
   display: flex;
@@ -545,4 +503,35 @@ button {
   /* max-width: 370px;
   width: 370px; */
   margin-left: 10px;
+}
+
+/* PAYMENTS */
+/* .close-button--wrap {
+  margin
+} */
+.payments-page--wrap {
+  height: 100%;
+}
+.ticket-wrap.left {
+  background: var(--bodyColor);
+  max-width: 70%;
+  padding-top: 50px;
+  width: 60%;
+  padding-right: 100px;
+  padding-left: 100px;
+  /* margin-right: auto; */
+  /* margin-left: auto; */
+} 
+.ticket--price--wrap {
+  margin-top: 80px;
+}
+.ticket--bordered {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #BDBDBD;
+  padding-top: 20px;
+}
+
+.order-summary--wrap {
+  background: var(--whiteColor);
+
 }
