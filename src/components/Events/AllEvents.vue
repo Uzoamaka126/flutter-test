@@ -39,7 +39,6 @@
 <script>
 import Header from "../Header";
 import SingleEvent from "./SingleEventCard";
-import axios from "axios";
 
 export default {
   name: "AllEvents",

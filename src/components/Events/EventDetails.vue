@@ -6,7 +6,7 @@
         <div class="page-preview container">
           <div class="fadeInUp animated">
             <div class="row">
-              <h1>User with {{ title }}</h1>
+             jjjj
             </div>
           </div>
         </div>

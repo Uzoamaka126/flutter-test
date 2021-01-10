@@ -1,8 +1,8 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
 import Hello from "@/components/HelloWorld";
-import App from "../App";
 import EventDetails from "@/components/Events/EventDetails";
+import AllEvents from "@/components/Events/AllEvents";
 
 Vue.use(VueRouter);
 
@@ -11,8 +11,8 @@ export const router = new VueRouter({
   routes: [
     {
       path: "/",
-      name: "App",
-      component: App,
+      name: "AllEvents",
+      component: AllEvents,
     },
     {
       path: "/no-tickets",
@@ -20,9 +20,10 @@ export const router = new VueRouter({
       component: Hello,
     },
     {
-      path: "/events/:title",
+      // path: "/events/:title",
+      path: "/event",
       name: "EventDetails",
-      props: true,
+      // props: true,
       component: EventDetails,
     },
   ],

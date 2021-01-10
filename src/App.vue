@@ -1,17 +1,12 @@
 <template>
- <div id="app">
-    <AllEvents />
- </div>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import AllEvents from "./components/Events/AllEvents";
-
 export default {
   name: "App",
-  components: {
-    AllEvents,
-  },
 };
 </script>
 
@@ -20,14 +15,4 @@ export default {
 @import "./assets/css/misc.css";
 @import "./assets/css/media.css";
 @import "./assets/css/normalise.css";
-
-
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
 </style>
