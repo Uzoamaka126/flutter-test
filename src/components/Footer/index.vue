@@ -1,0 +1,26 @@
+<template>
+  <footer>
+    <div class="flex justify-between align-center column--100 header--wrap">
+      <div class="nav-brand">
+        <img src="../../assets/img/Logo.svg" alt="flutterwave logo image" />
+      </div>
+      <div class="nav-right">
+        <router-link to="/no-tickets" class="">
+          I didn’t get my tickets
+        </router-link>
+        <router-link
+          to="/create-event"
+          class="button--primary button--primary--md"
+        >
+          CREATE YOUR OWN EVENT
+        </router-link>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+export default {
+  name: "Footer",
+};
+</script>
