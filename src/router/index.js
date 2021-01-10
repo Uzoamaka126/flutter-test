@@ -1,16 +1,17 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
-import Hello from "@/components/HelloWorld";
-import EventDetails from "@/components/Events/EventDetails";
-import AllEvents from "@/components/Events/AllEvents";
 
 Vue.use(VueRouter);
+
+const AllEvents = () => import("@/components/Events/AllEvents");
+const EventDetails = () => import("@/components/Events/EventDetails");
+const Hello = () => import("@/components/HelloWorld");
 
 export const router = new VueRouter({
   mode: "history",
   routes: [
     {
-      path: "/",
+      path: "/events",
       name: "AllEvents",
       component: AllEvents,
     },
@@ -26,5 +27,13 @@ export const router = new VueRouter({
       // props: true,
       component: EventDetails,
     },
+    {
+      // path: "/events/:title",
+      path: "/payment",
+      name: "EventDetails",
+      // props: true,
+      component: EventDetails,
+    },
+    { path: "/", redirect: "/events" },
   ],
 });

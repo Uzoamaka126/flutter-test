@@ -5,7 +5,7 @@
   --whiteColor: #ffffff;
   --greenColor: #219653;
   --redColor: #eb5757;
-  --bodyColor: #F2F2F2;
+  --bodyColor: #f2f2f2;
 }
 html {
   scroll-behavior: smooth;
@@ -400,8 +400,9 @@ button {
 .page-layout---card {
   background: var(--whiteAlt);
   position: relative;
-  margin-top: 150px;
   width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
 /* Divider */
@@ -516,7 +517,8 @@ button {
   margin: 0 auto;
 }
 
-.event-page--info, .event-info--others {
+.event-page--info,
+.event-info--others {
   max-width: 50%;
   width: 50%;
   margin-top: 50px;
