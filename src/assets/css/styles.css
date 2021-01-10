@@ -165,7 +165,9 @@ p {
   margin-right: -15px;
   margin-left: -15px;
 }
-
+.column-100 {
+    width: 100%;
+}
 /********** BUTTONS ***********/
 button {
   outline: none;
@@ -368,7 +370,6 @@ button {
   border: 0.5px solid #ccb7b1;
   width: 100%;
   max-width: 100%;
-  height: 0px;
   margin: 0px !important;
 }
 
@@ -514,7 +515,7 @@ button {
 }
 .ticket-wrap.left {
   background: var(--bodyColor);
-  max-width: 70%;
+  max-width: 60%;
   padding-top: 50px;
   width: 60%;
   padding-right: 100px;
@@ -533,5 +534,14 @@ button {
 
 .order-summary--wrap {
   background: var(--whiteColor);
-
+  width: calc(100% - 70%);
+    padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  min-height: 100vh;
+}
+.order-total {
+  margin-top: 150px;
+  padding-top: 34px;
+  border-top: 1px solid #BDBDBD;
 }
