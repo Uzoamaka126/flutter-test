@@ -178,6 +178,9 @@ button {
   pointer-events: none;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
 .button--primary {
   font-size: 14px;
   line-height: 0.8;

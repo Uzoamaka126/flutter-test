@@ -4,7 +4,6 @@
       <div class="payments-page--wrap">
         <div class="flex">
           <div class="ticket-wrap left">
-            <!-- <div class="container flex"> -->
             <div class="close-button--wrap flex mb-5">
               <button class="button--primary button-round">
                 <img src="../../../assets/img/Close.svg" class="mr-1" />Close
@@ -60,54 +59,13 @@
                 Ticket sales ends on 22nd November 2019
               </p>
             </div>
-            <!-- </div> -->
           </div>
           <div class="order-summary--wrap">
-            <h6 class="text-capitalize color-dark text-semi-bold">
-              Order summary
-            </h6>
-            <div class="divider mt-4"></div>
-            <div class="mt-5">
-              <div>
-                <div class="flex justify-between">
-                  <span>2 - Regular</span>
-                  <span class="color-grey">N10,000</span>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <span>1 - VIP</span>
-                  <span class="color-grey">N10,000</span>
-                </div>
-              </div>
+            <div v-if="isNotCheckout">
+              <OrderSummary :goNext="goNext" />
             </div>
-            <div>
-              <div class="order-total">
-                <div class="flex justify-between">
-                  <span>Sub-total</span>
-                  <span class="color-grey">N110,000</span>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <span class="text-capitalize text-sm">VAT</span>
-                  <span class="color-grey">N10,000</span>
-                </div>
-                <div class="mt-4 flex justify-between">
-                  <span class="text-capitalize text-sm">Total payment</span>
-                  <span class="color-grey text-md text-semi--bold"
-                    >N10,000</span
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="mt-4 column-100">
-              <button to="/create-event" class="button--primary column-100">
-                CONTINUE
-              </button>
-            </div>
-            <div class="flex mt-4">
-              <span class="mr-2"><img src="../../../assets/img/guarantee.svg"/></span>
-              <div>
-                <p class="color-dark">100% customer protection</p>
-                <p class="color-grey--3">Money back guarantee</p>
-              </div>
+            <div v-else>
+              <UserInfo :goBack="goBack" />
             </div>
           </div>
         </div>
@@ -117,20 +75,32 @@
 </template>
 
 <script>
+import OrderSummary from "./OrderSummary";
+import UserInfo from "./UserInfo";
+
 export default {
   name: "EventPayment",
-  components: {},
+  components: {
+    OrderSummary,
+    UserInfo,
+  },
   data() {
     return {
       events: [],
+      isNotCheckout: true,
     };
   },
-  created() {
-    // this.fetchData()
-  },
+  created() {},
   //    watch: {
   //     '$route': 'fetchData'
   //   },
-  async fetchData() {},
+  methods: {
+    goNext() {
+      this.isNotCheckout = false;
+    },
+    goBack() {
+        this.isNotCheckout = true;
+    }
+  },
 };
 </script>
