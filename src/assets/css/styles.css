@@ -459,6 +459,11 @@ button {
   height: 253px;
 }
 
+.card-md {
+  height: 449px;
+    max-width: 470px;
+}
+
 .event-img--wrap {
   height: 231px;
   max-width: 100%;
