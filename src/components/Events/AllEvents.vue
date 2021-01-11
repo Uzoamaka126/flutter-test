@@ -12,7 +12,7 @@
                 </h1>
                 <div
                   class="card-single--event"
-                  v-for="item in array"
+                  v-for="item in events"
                   :key="item.id"
                 >
                   <router-link
@@ -39,6 +39,7 @@
 <script>
 import Header from "../Header";
 import SingleEvent from "./SingleEventCard";
+import { mapState } from "vuex";
 
 export default {
   name: "AllEvents",
@@ -47,18 +48,23 @@ export default {
     SingleEvent,
   },
   data() {
-    return {
-      events: [],
-    };
+    return {};
   },
-  created() {
-    // this.fetchData()
+  // computed: mapState({
+  //   events: (state) => state.events,
+  // }),
+  computed: mapState(["events", "eventsState", "fetchEventsErrMsg"]),
+  mounted: function() {
+    console.log(this.loadEvents());
+    this.loadEvents();
   },
-  //    watch: {
-  //     '$route': 'fetchData'
-  //   },
-  async fetchData() {
-   
+  // methods: {
+  //   ...mapActions(["fetchEvents"]),
+  // },
+  methods: {
+    loadEvents() {
+      this.$store.dispatch("fetchEvents");
+    },
   },
 };
 </script>

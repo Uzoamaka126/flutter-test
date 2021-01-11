@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const postCall = async (url, data, params, headers) => {
-//   document.body.classList.add("network-active");
+  //   document.body.classList.add("network-active");
   let finalData = data;
   return axios({
     method: "post",
@@ -9,7 +9,7 @@ export const postCall = async (url, data, params, headers) => {
     data: finalData,
     headers: headers,
     params: params,
-    baseURL: `${process.env.REACT_APP_URL}`,
+    baseURL: `${process.env.VUE_APP_BASE_URL}`,
   }).catch((error) => {
     if (error.toString().includes("Network Error")) {
       // Handle Network Error
@@ -29,11 +29,11 @@ export const postCall = async (url, data, params, headers) => {
 export const getCall = async (url, data, params, headers) => {
   return axios({
     method: "get",
-      url: url,
+    url: url,
     data: data,
     params: params,
     headers: headers,
-    baseURL: `${process.env.REACT_APP_URL}`,
+    baseURL: `${process.env.VUE_APP_BASE_URL}`,
   }).catch((error) => {
     if (error.toString().includes("Network Error")) {
       // Handle Network Error
