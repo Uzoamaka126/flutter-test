@@ -166,7 +166,7 @@ p {
   margin-left: -15px;
 }
 .column-100 {
-    width: 100%;
+  width: 100%;
 }
 /********** BUTTONS ***********/
 button {
@@ -200,8 +200,10 @@ button {
   -o-border-radius: 4px;
 }
 
-.button--primary:hover, .button--primary--md:hover, .button-round:hover {
-    transform: translate3d(0px, -3px, 0px);
+.button--primary:hover,
+.button--primary--md:hover,
+.button-round:hover {
+  transform: translate3d(0px, -3px, 0px);
 }
 
 .button--primary--md {
@@ -447,6 +449,16 @@ button {
   width: 100%;
   justify-content: space-evenly;
 }
+.card {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.card-small {
+  max-width: 450px;
+  height: 253px;
+}
+
 .event-img--wrap {
   height: 231px;
   max-width: 100%;
@@ -525,20 +537,20 @@ button {
   padding-left: 100px;
   /* margin-right: auto; */
   /* margin-left: auto; */
-} 
+}
 .ticket--price--wrap {
   margin-top: 80px;
 }
 .ticket--bordered {
   padding-bottom: 20px;
-  border-bottom: 1px solid #BDBDBD;
+  border-bottom: 1px solid #bdbdbd;
   padding-top: 20px;
 }
 
 .order-summary--wrap {
   background: var(--whiteColor);
   width: calc(100% - 70%);
-    padding-top: 50px;
+  padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
   min-height: 100vh;
@@ -546,5 +558,21 @@ button {
 .order-total {
   margin-top: 150px;
   padding-top: 34px;
-  border-top: 1px solid #BDBDBD;
+  border-top: 1px solid #bdbdbd;
+}
+
+/* No Tickets */
+.ticket-form--wrap {
+  max-width: 450px;
+  margin: 80px auto !important;
+  flex-direction: column;
+  align-items: center;
+}
+.ticket-form--wrap h6 {
+  max-width: 370px;
+  text-align: center;
+  margin-bottom: 13px;
+}
+.ticket-input--wrap {
+  max-width: 386px;
 }

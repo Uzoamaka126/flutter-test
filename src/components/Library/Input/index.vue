@@ -5,6 +5,12 @@
       type="text"
       :value="value"
       class="input"
+      v-bind:class="{ width: isActive, 'text-danger': hasError }"
+      :style="[
+        width
+          ? { width: width }
+          : { width: '100%' },
+      ]"
       @focus="show = !show"
       @blur="show = !show"
       @input="$emit('update', $event.target.value)"
@@ -21,7 +27,7 @@ export default {
       show: false,
     };
   },
-  props: ["value", "label"],
+  props: ["value", "label", "width"],
   model: {
     prop: "value",
     event: "update",
@@ -35,14 +41,14 @@ export default {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   color: #555;
-  width: 100%;
+  /* width: 100%; */
   outline: none;
   padding: 15px 5px;
   margin-top: 12px;
 }
 .input-container {
   width: 100%;
-  padding: 0.5rem 0.5rem 0 0;
+  /* padding: 0.5rem 0.5rem 0 0; */
 }
 
 label {
