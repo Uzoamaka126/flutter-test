@@ -23,7 +23,7 @@
                     </h6>
                     <p class="text-md color-dark mt-5">N5000 – N2,000,000</p>
                     <router-link
-                      to="/create-event"
+                      :to="'/payment/' + event.id"
                       class="button--primary button--primary--md button-md--width mt-3"
                     >
                       BUY TICKETS

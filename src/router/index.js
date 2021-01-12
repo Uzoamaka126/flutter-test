@@ -27,10 +27,9 @@ export const router = new VueRouter({
       component: EventDetails,
     },
     {
-      // path: "/events/:title",
-      path: "/payment",
+      path: "/payment/:id",
       name: "EventPayment",
-      // props: true,
+      props: true,
       component: EventPayment,
     },
     {
@@ -41,7 +40,6 @@ export const router = new VueRouter({
     {
       path: "/ticket-confirmed",
       name: "TicketConfirmation",
-      // props: true,
       component: TicketConfirmation,
     },
     { path: "/", redirect: "/events" },

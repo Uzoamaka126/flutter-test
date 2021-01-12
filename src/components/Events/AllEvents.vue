@@ -5,7 +5,7 @@
       <div class="page-entry page--transition">
         <div class="page-entry--wrap">
           <div class="page-preview container">
-            <div  class="fadeInUp animated">
+            <div class="fadeInUp animated">
               <div class="row">
                 <div class="page-layout---card">
                   <h1 class="color-dark text-xlbold">
@@ -19,12 +19,6 @@
                       class="card-event"
                       :to="'/events/' + item.id"
                     >
-                      <!-- :to="{
-                      name: 'EventDetails',
-                      path: `/events/${item.id}`,
-                      params: { id: item.id },
-                    }" -->
-
                       <SingleEvent v-bind:event="item" v-bind:key="item.id" />
                     </router-link>
                   </div>
@@ -47,7 +41,7 @@
         </div>
       </div>
     </div>
-    <Spinner v-else  />
+    <Spinner v-else />
   </div>
 </template>
 
