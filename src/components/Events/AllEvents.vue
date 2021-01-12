@@ -39,7 +39,7 @@
 <script>
 import Header from "../Header";
 import SingleEvent from "./SingleEventCard";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "AllEvents",
@@ -47,24 +47,18 @@ export default {
     Header,
     SingleEvent,
   },
-  data() {
-    return {};
-  },
-  // computed: mapState({
-  //   events: (state) => state.events,
-  // }),
   computed: mapState(["events", "eventsState", "fetchEventsErrMsg"]),
   mounted: function() {
-    console.log(this.loadEvents());
-    this.loadEvents();
+    console.log(this.eventsState, this.fetchEventsErrMsg, typeof this.events);
+    this.fetchEvents;
+  },
+  methods: {
+    ...mapActions(["fetchEvents"]),
   },
   // methods: {
-  //   ...mapActions(["fetchEvents"]),
+  //   loadEvents() {
+  //     this.$store.dispatch("fetchEvents");
+  //   },
   // },
-  methods: {
-    loadEvents() {
-      this.$store.dispatch("fetchEvents");
-    },
-  },
 };
 </script>
