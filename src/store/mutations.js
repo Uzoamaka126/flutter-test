@@ -24,8 +24,19 @@ export default {
   NO_MORE_EVENTS(state) {
     state.endEventsList = "End of list";
   },
-  // SET_EMAIL
+  //
   SET_EMAIL(state, value) {
     state.userInfo = { ...state.userInfo, email: value };
+  },
+  GET_SINGLE_EVENT_STARTED(state) {
+    state.fetchEventState = "loading";
+  },
+  GET_SINGLE_EVENT_SUCCEEDED(state, event) {
+    state.fetchEventState = "success";
+    state.event = {...state.event, ...event};
+  },
+  GET_SINGLE_EVENT_FAILED(state, { errMsg }) {
+    state.fetchEventState = "failed";
+    state.fetchEventErrMsg = errMsg;
   },
 };

@@ -37,8 +37,8 @@ export default {
   border-radius: 50%;
   border-top: 5px solid #f5a623;
   border-bottom: 5px solid #f5a623;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   -webkit-animation: spin-data-v-48417230 2s linear infinite;
   animation: spin-data-v-48417230 2s linear infinite;
   margin: 180px auto 0;

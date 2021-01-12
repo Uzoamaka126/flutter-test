@@ -8,7 +8,9 @@ const state = {
   loadMoreErrMsg: "",
   userInfo: {
     email: ""
-  }
+  },
+  fetchEventState: "initial",
+  fetchEventErrMsg: null
 };
 
 
