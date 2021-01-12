@@ -135,7 +135,7 @@ h1 {
 
 h6 {
   font-size: 18px;
-  line-height: 24px;
+  line-height: 21px;
 }
 
 p {
@@ -200,6 +200,13 @@ button {
   -o-border-radius: 4px;
 }
 
+.button--secondary {
+  background: var(--bodyColor);
+  border: 1px solid var(--primaryColor);
+  color: var(--primaryColor);
+  width: 300px;
+  max-width: 300px;
+}
 .button--primary:hover,
 .button--primary--md:hover,
 .button-round:hover {
@@ -368,6 +375,10 @@ button {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
+}
+
+.page-layout---card h1 {
+  margin-top: 70px;
 }
 
 /* Divider */
@@ -580,4 +591,9 @@ button {
 }
 .ticket-input--wrap {
   max-width: 386px;
+}
+
+/* Loading Events */
+.form-loading {
+  
 }

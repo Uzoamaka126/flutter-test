@@ -21,10 +21,9 @@ export const router = new VueRouter({
       component: AllEvents,
     },
     {
-      // path: "/events/:title",
-      path: "/event",
+      path: "/events/:name",
       name: "EventDetails",
-      // props: true,
+      props: true,
       component: EventDetails,
     },
     {

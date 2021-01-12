@@ -3,6 +3,9 @@ const state = {
   event: {},
   eventsState: "initial",
   fetchEventsErrMsg: null,
+  endEventsList: "",
+  loadMoreState: "inital",
+  loadMoreErrMsg: ""
 };
 
 
