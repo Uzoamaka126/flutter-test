@@ -1,53 +1,59 @@
 <template>
   <div>
-    <Header />
-    <div class="page-entry page--transition">
-      <div class="page-entry--wrap">
-        <div class="page-preview container">
-          <div v-if="eventsState === 'success'" class="fadeInUp animated">
-            <div class="row">
-              <div class="page-layout---card">
-                <h1 class="color-dark text-xlbold">
-                  The best events happening now.
-                </h1>
-                <div class="card-single--event mt-5">
-                  <router-link
-                    v-for="item in events"
-                    :key="item.id"
-                    exact
-                    class="card-event"
-                    :to="'/events/' + item.id"
-                  >
-                    <!-- :to="{
+    <div v-if="eventsState === 'success'">
+      <Header />
+      <div class="page-entry page--transition">
+        <div class="page-entry--wrap">
+          <div class="page-preview container">
+            <div  class="fadeInUp animated">
+              <div class="row">
+                <div class="page-layout---card">
+                  <h1 class="color-dark text-xlbold">
+                    The best events happening now.
+                  </h1>
+                  <div class="card-single--event mt-5">
+                    <router-link
+                      v-for="item in events"
+                      :key="item.id"
+                      exact
+                      class="card-event"
+                      :to="'/events/' + item.id"
+                    >
+                      <!-- :to="{
                       name: 'EventDetails',
                       path: `/events/${item.id}`,
                       params: { id: item.id },
                     }" -->
-                    
-                    <SingleEvent v-bind:event="item" v-bind:key="item.id" />
-                  </router-link>
-                </div>
-                <div class="mt-5 flex align-center justify-center">
-                  <button
-                    to="/create-event"
-                    class="button--primary button--secondary"
-                    v-bind:class="{ 'form-loading': loadMoreState === 'loading' }"
-                    @click="loadEvents($event)"
-                  >
-                    CONTINUE
-                  </button>
+
+                      <SingleEvent v-bind:event="item" v-bind:key="item.id" />
+                    </router-link>
+                  </div>
+                  <div class="mt-5 flex align-center justify-center">
+                    <button
+                      to="/create-event"
+                      class="button--primary button--secondary"
+                      v-bind:class="{
+                        'form-loading': loadMoreState === 'loading',
+                      }"
+                      @click="loadEvents($event)"
+                    >
+                      CONTINUE
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <Spinner v-show="eventsState === 'loading'" />
         </div>
       </div>
     </div>
+    <Spinner v-else  />
   </div>
 </template>
 
 <script>
+// v-show="eventsState === 'loading'"
+
 import Header from "../Header";
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
@@ -101,7 +107,7 @@ export default {
       Vue.toasted.show("No more events");
     },
     loadEvents: function(event) {
-      console.log(event)
+      console.log(event);
       let position = this.offset(event.target);
       this.loadMoreEvents(this.count, this.endEvents, function scroll() {
         window.scrollTo({ top: position.top - 140, behavior: "smooth" });
