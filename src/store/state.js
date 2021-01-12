@@ -3,7 +3,6 @@ const state = {
   event: {},
   eventsState: "initial",
   fetchEventsErrMsg: null,
-  hey: []
 };
 
 

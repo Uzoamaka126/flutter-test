@@ -10,12 +10,10 @@
                 <h1 class="color-dark text-xlbold">
                   The best events happening now.
                 </h1>
-                <div
-                  class="card-single--event"
-                  v-for="item in events"
-                  :key="item.id"
-                >
+                <div class="card-single--event mt-5">
                   <router-link
+                    v-for="item in events"
+                    :key="item.id"
                     exact
                     :to="{
                       name: 'EventDetails',
@@ -49,8 +47,7 @@ export default {
   },
   computed: mapState(["events", "eventsState", "fetchEventsErrMsg"]),
   mounted: function() {
-    console.log();
-    this.fetchEvents;
+    this.fetchEvents();
   },
   methods: {
     ...mapActions(["fetchEvents"]),
