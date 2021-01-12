@@ -11,11 +11,14 @@
                   Enter your email and we’ll send your tickets right away!
                 </h6>
                 <div class="card card-md pl-5 pr-5 ">
-                  <div class="ticket-input--wrap pt-5 flex justify-center flex-column mt-2">
+                  <div
+                    class="ticket-input--wrap pt-5 flex justify-center flex-column mt-2"
+                  >
                     <img src="../../../assets/img/check-circle.svg" />
-                    <h6>
+                    <h6 class="text-normal">
                       Your tickets have been confirmed and sent to your email
-                      address at <span>ted@flutterwave.com</span>
+                      address at
+                      <p class="color-blue">{{ userInfo.email }}</p>
                     </h6>
                   </div>
                   <div class="mt-4 column-100">
@@ -38,6 +41,7 @@
 
 <script>
 import Header from "../../Header";
+import { mapState } from "vuex";
 
 export default {
   name: "TicketConfirmation",
@@ -51,6 +55,9 @@ export default {
   },
   model: {
     event: "change",
+  },
+  computed: {
+    ...mapState(["userInfo"]),
   },
   methods: {
     updateInput(value) {

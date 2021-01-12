@@ -38,7 +38,12 @@ const loadMoreEvents = async ({ commit }, end, scrollFn) => {
   }
 };
 
+const setUserEmail = async ({ commit }, value) => {
+  commit("SET_EMAIL",  value);
+};
+
 export default {
   fetchEvents,
   loadMoreEvents,
+  setUserEmail,
 };

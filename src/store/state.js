@@ -5,7 +5,10 @@ const state = {
   fetchEventsErrMsg: null,
   endEventsList: "",
   loadMoreState: "inital",
-  loadMoreErrMsg: ""
+  loadMoreErrMsg: "",
+  userInfo: {
+    email: ""
+  }
 };
 
 

@@ -15,13 +15,14 @@
                     v-for="item in events"
                     :key="item.id"
                     exact
-                    :to="{
-                      name: 'EventDetails',
-                      path: `/events/${item.title}`,
-                      params: { title: item.title },
-                    }"
                     class="card-event"
+                    to="{`/events/${item.name}`}"
                   >
+                    <!-- :to="{
+                      name: 'EventDetails',
+                      path: `/events/${item.name}`,
+                      params: { item.name },
+                    }" -->
                     <SingleEvent v-bind:event="item" v-bind:key="item.id" />
                   </router-link>
                 </div>

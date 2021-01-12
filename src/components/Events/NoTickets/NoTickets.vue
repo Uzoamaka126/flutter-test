@@ -21,7 +21,12 @@
                   <div class="mt-4 column-100">
                     <button
                       to="/create-event"
-                      class="button--primary column-100"
+                      :class="{
+                        'button--primary column-100 form-loading': loading,
+                        'button--primary column-100 disabled': email === '',
+                        'button--primary column-100': !loading
+                      }"
+                      @click="handleSubmit"
                     >
                       CONFIRM AND SEND TICKET
                     </button>
@@ -39,6 +44,8 @@
 <script>
 import Header from "../../Header";
 import CustomInput from "../../Library/Input";
+import { mapActions } from "vuex";
+
 
 export default {
   name: "NoTickets",
@@ -49,22 +56,25 @@ export default {
   data: function() {
     return {
       email: "",
-      loading: false
+      loading: false,
     };
   },
-   model: {
+  model: {
     event: "change",
   },
   methods: {
+    ...mapActions(["setUserEmail"]),
     updateInput(value) {
       this.$emit("change", value);
     },
     handleSubmit() {
-      this.loading =
+      this.loading = true;
+      this.setUserEmail(this.email);
       setTimeout(() => {
-        this.lo
-      }, 1500)
-    }
+        this.loading = false;
+        this.$router.push("/ticket-confirmed");
+      }, 1500);
+    },
   },
 };
 </script>

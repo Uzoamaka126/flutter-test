@@ -24,4 +24,8 @@ export default {
   NO_MORE_EVENTS(state) {
     state.endEventsList = "End of list";
   },
+  // SET_EMAIL
+  SET_EMAIL(state, value) {
+    state.userInfo = { ...state.userInfo, email: value };
+  },
 };

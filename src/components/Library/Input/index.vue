@@ -5,7 +5,6 @@
       type="text"
       :value="value"
       class="input"
-      v-bind:class="{ width: isActive, 'text-danger': hasError }"
       :style="[
         width
           ? { width: width }
@@ -15,6 +14,7 @@
       @blur="show = !show"
       @input="$emit('update', $event.target.value)"
     />
+      <!-- v-bind:class="{ width: isActive, 'text-danger': hasError }" -->
   </div>
 </template>
 
