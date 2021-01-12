@@ -3,7 +3,6 @@ import { getCall } from "../network/axiosHelpers";
 
 const fetchEvents = async ({ commit }) => {
   commit("FETCH_EVENTS_STARTED");
-  console.log(urls.getEvents)
   try {
     const response = await getCall(urls.getEvents);
     if (response.data.status !== "success") {

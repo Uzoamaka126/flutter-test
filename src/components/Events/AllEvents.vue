@@ -49,7 +49,7 @@ export default {
   },
   computed: mapState(["events", "eventsState", "fetchEventsErrMsg"]),
   mounted: function() {
-    console.log(this.eventsState, this.fetchEventsErrMsg, typeof this.events);
+    console.log();
     this.fetchEvents;
   },
   methods: {

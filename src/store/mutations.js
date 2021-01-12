@@ -6,7 +6,8 @@ export default {
   //   state.eventsState = "success";
   //   state.events = events;
   // },
-  FETCH_EVENTS_SUCCEEDED (state, events) {
+  FETCH_EVENTS_SUCCEEDED(state, events) {
+    console.log(state)
     state.eventsState = "success";
     state.events = events;
   },
