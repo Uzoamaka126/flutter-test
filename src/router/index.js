@@ -7,14 +7,14 @@ const AllEvents = () => import("@/components/Events/AllEvents");
 const EventDetails = () => import("@/components/Events/EventDetails");
 const EventPayment = () => import("@/components/Events/Payments/EventPayment");
 const NoTickets = () => import("@/components/Events/NoTickets/NoTickets");
+const NotFound = () => import("@/components/NotFound");
 const TicketConfirmation = () =>
   import("@/components/Events/NoTickets/TicketConfirmation");
-
-//
 
 export const router = new VueRouter({
   mode: "history",
   routes: [
+    { path: "*", component: NotFound },
     {
       path: "/events",
       name: "AllEvents",
@@ -36,7 +36,6 @@ export const router = new VueRouter({
     {
       path: "/no-tickets",
       name: "NoTickets",
-      // props: true,
       component: NoTickets,
     },
     {

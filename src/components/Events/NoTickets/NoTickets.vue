@@ -49,6 +49,7 @@ export default {
   data: function() {
     return {
       email: "",
+      loading: false
     };
   },
    model: {
@@ -58,6 +59,12 @@ export default {
     updateInput(value) {
       this.$emit("change", value);
     },
+    handleSubmit() {
+      this.loading =
+      setTimeout(() => {
+        this.lo
+      }, 1500)
+    }
   },
 };
 </script>
