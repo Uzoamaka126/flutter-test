@@ -42,12 +42,11 @@ export default {
   },
   data() {
     return {
-      isFree: this.event.isFree,
-      isAvailable: this.event.isAvailable,
+      
     };
   },
   // created() {
-  //   this.reversedMessage();
+  //   
   // },
   // watch: {
   //   // $route(to, from) {

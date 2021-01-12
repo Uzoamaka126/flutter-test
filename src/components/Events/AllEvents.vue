@@ -4,7 +4,7 @@
     <div class="page-entry page--transition">
       <div class="page-entry--wrap">
         <div class="page-preview container">
-          <div class="fadeInUp animated">
+          <div v-if="events.length !== 0" class="fadeInUp animated">
             <div class="row">
               <div class="page-layout---card">
                 <h1 class="color-dark text-xlbold">
@@ -28,6 +28,7 @@
               </div>
             </div>
           </div>
+          <Spinner v-else />
         </div>
       </div>
     </div>
@@ -37,6 +38,7 @@
 <script>
 import Header from "../Header";
 import SingleEvent from "./SingleEventCard";
+import Spinner from "../Library/Spinner";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -44,6 +46,7 @@ export default {
   components: {
     Header,
     SingleEvent,
+    Spinner,
   },
   computed: mapState(["events", "eventsState", "fetchEventsErrMsg"]),
   mounted: function() {
@@ -52,10 +55,5 @@ export default {
   methods: {
     ...mapActions(["fetchEvents"]),
   },
-  // methods: {
-  //   loadEvents() {
-  //     this.$store.dispatch("fetchEvents");
-  //   },
-  // },
 };
 </script>
