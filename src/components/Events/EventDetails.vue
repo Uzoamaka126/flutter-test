@@ -130,18 +130,22 @@ export default {
   mounted: function() {
     this.fetchSingleEvent(this.id);
     this.checkForEvent();
+
+    if(this.id === "undefined") {
+      this.$router.push("/events")
+    }
   },
   watch: {
     checkEvent() {
       this.event, this.fetchEventState;
     },
-    '$route': 'fetchSingleEvent'
+    '$route': 'fetchSingleEvent',
   },
   methods: {
     ...mapActions(["fetchSingleEvent"]),
     checkForEvent() {
       if (this.event === {}) {
-        this.$route.push("/events");
+        this.$router.push("/events");
       }
     },
   },

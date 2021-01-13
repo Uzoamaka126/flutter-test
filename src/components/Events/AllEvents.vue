@@ -17,7 +17,7 @@
                       :key="item.id"
                       exact
                       class="card-event"
-                      :to="'/events/' + item.id"
+                      :to="`events/${item.id}`"
                     >
                       <SingleEvent v-bind:event="item" v-bind:key="item.id" />
                     </router-link>

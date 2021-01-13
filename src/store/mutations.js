@@ -53,37 +53,37 @@ export default {
   INCREMENT_REGULAR_COUNT(state) {
     state.event = {
       ...state.event,
-      count: { ...state.event.count, regular: state.event.count.regular++ },
+      counts: { ...state.event.counts, regular: state.event.counts.regular + 1 },
     };
   },
   INCREMENT_VIP_COUNT(state) {
     state.event = {
       ...state.event,
-      count: { ...state.event.count, vip: state.event.count.vip++ },
+      counts: { ...state.event.counts, vip: state.event.counts.vip + 1 },
     };
   },
   INCREMENT_TABLE_COUNT(state) {
     state.event = {
       ...state.event,
-      count: { ...state.event.count, table: state.event.count.table++ },
+      counts: { ...state.event.counts, table: state.event.counts.table + 1 },
     };
   },
   DECREMENT_REGULAR_COUNT(state) {
     state.event = {
       ...state.event,
-      count: { ...state.event.count, regular: state.event.count.regular-- },
+      counts: { ...state.event.counts, regular: state.event.counts.regular-- },
     };
   },
   DECREMENT_VIP_COUNT(state) {
     state.event = {
       ...state.event,
-      count: { ...state.event.count, vip: state.event.count.vip-- },
+      counts: { ...state.event.counts, vip: state.event.counts.vip-- },
     };
   },
   DECREMENT_TABLE_COUNT(state) {
     state.event = {
       ...state.event,
-      count: { ...state.event.count, table: state.event.count.table-- },
+      counts: { ...state.event.counts, table: state.event.counts.table-- },
     };
   },
 };
