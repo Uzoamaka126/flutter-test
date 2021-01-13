@@ -2,10 +2,7 @@
   <div>
     <div v-if="fetchEventState === 'success'">
       <Header />
-      <div
-        
-        class="page-entry page--transition"
-      >
+      <div class="page-entry page--transition">
         <div class="page-entry--wrap">
           <div class="page-preview container">
             <div class="fadeInUp animated">
@@ -23,11 +20,24 @@
                     </h6>
                     <p class="text-md color-dark mt-5">N5000 – N2,000,000</p>
                     <router-link
+                      v-if="
+                        event.is_free === false && event.is_sold_out === false
+                      "
                       :to="'/payment/' + event.id"
                       class="button--primary button--primary--md button-md--width mt-3"
                     >
                       BUY TICKETS
                     </router-link>
+                    <router-link
+                      v-else-if="
+                        event.is_free === true && event.is_sold_out === false
+                      "
+                      :to="'/payment/' + event.id"
+                      class="button--primary button--primary--md button-md--width mt-3"
+                    >
+                      REGISTER
+                    </router-link>
+                    <p v-else class="color-red text-normal mt-4">SOLD OUT</p>
                   </div>
                   <div class="event-page--info right">
                     <img :src="event.image" />
@@ -84,7 +94,7 @@
         </div>
       </div>
     </div>
-      <Spinner v-show="fetchEventState === 'loading'" />
+    <Spinner v-show="fetchEventState === 'loading'" />
   </div>
 </template>
 
@@ -120,12 +130,12 @@ export default {
   mounted: function() {
     this.fetchSingleEvent(this.id);
     this.checkForEvent();
-    console.log(this.fetchEventState);
   },
   watch: {
     checkEvent() {
       this.event, this.fetchEventState;
     },
+    '$route': 'fetchSingleEvent'
   },
   methods: {
     ...mapActions(["fetchSingleEvent"]),

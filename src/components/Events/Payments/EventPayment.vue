@@ -5,7 +5,7 @@
         <div class="flex">
           <div class="ticket-wrap left">
             <div class="close-button--wrap flex mb-5">
-              <button class="button--primary button-round">
+              <button class="button--primary button-round" @click="close">
                 <img src="../../../assets/img/Close.svg" class="mr-1" />Close
               </button>
             </div>
@@ -77,6 +77,7 @@
 <script>
 import OrderSummary from "./OrderSummary";
 import UserInfo from "./UserInfo";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "EventPayment",
@@ -86,21 +87,25 @@ export default {
   },
   data() {
     return {
-      events: [],
       isNotCheckout: true,
     };
   },
-  created() {},
-  //    watch: {
-  //     '$route': 'fetchData'
-  //   },
+  computed: {
+    ...mapState(["event"]),
+  },
+  created() {
+  },
   methods: {
+    ...mapActions(["fetchSingleEvent"]),
     goNext() {
       this.isNotCheckout = false;
     },
     goBack() {
-        this.isNotCheckout = true;
-    }
+      this.isNotCheckout = true;
+    },
+    close() {
+      this.$router.push(`/events/' + ${this.event.id}`);
+    },
   },
 };
 </script>
