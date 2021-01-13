@@ -33,10 +33,57 @@ export default {
   },
   GET_SINGLE_EVENT_SUCCEEDED(state, event) {
     state.fetchEventState = "success";
-    state.event = {...state.event, ...event};
+    state.event = { ...state.event, ...event };
   },
   GET_SINGLE_EVENT_FAILED(state, { errMsg }) {
     state.fetchEventState = "failed";
     state.fetchEventErrMsg = errMsg;
+  },
+  GET_EVENT_TICKETS_STARTED(state) {
+    state.fetchTicketsState = "loading";
+  },
+  GET_EVENT_TICKETS_SUCCEEDED(state, tickets) {
+    state.fetchTicketsState = "success";
+    state.event = { ...state.event, tickets: tickets };
+  },
+  GET_EVENT_TICKETS_FAILED(state, { errMsg }) {
+    state.fetchTicketsState = "failed";
+    state.ticketsErrMsg = errMsg;
+  },
+  INCREMENT_REGULAR_COUNT(state) {
+    state.event = {
+      ...state.event,
+      count: { ...state.event.count, regular: state.event.count.regular++ },
+    };
+  },
+  INCREMENT_VIP_COUNT(state) {
+    state.event = {
+      ...state.event,
+      count: { ...state.event.count, vip: state.event.count.vip++ },
+    };
+  },
+  INCREMENT_TABLE_COUNT(state) {
+    state.event = {
+      ...state.event,
+      count: { ...state.event.count, table: state.event.count.table++ },
+    };
+  },
+  DECREMENT_REGULAR_COUNT(state) {
+    state.event = {
+      ...state.event,
+      count: { ...state.event.count, regular: state.event.count.regular-- },
+    };
+  },
+  DECREMENT_VIP_COUNT(state) {
+    state.event = {
+      ...state.event,
+      count: { ...state.event.count, vip: state.event.count.vip-- },
+    };
+  },
+  DECREMENT_TABLE_COUNT(state) {
+    state.event = {
+      ...state.event,
+      count: { ...state.event.count, table: state.event.count.table-- },
+    };
   },
 };

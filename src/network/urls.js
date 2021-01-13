@@ -8,4 +8,5 @@ export const urls = {
   getEventTicketTypes: "/ticket-types/events/1",
   createOrder: "/orders",
   getOrder: "/orders/1",
+  getTickets: "/ticket-types/events/1",
 };

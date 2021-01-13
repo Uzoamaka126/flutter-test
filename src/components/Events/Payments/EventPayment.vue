@@ -15,54 +15,38 @@
                 8th February 2019
               </h6>
             </div>
-            <div class="ticket--price--wrap">
+            <div
+              class="ticket--price--wrap"
+              v-for="item in event.tickets"
+              :key="item.id"
+            >
               <div class="flex justify-between align-center ticket--bordered">
-                <p class="text-md text-normal color-dark">Regular</p>
-                <p class="text-md text-normal color-dark">N5000</p>
+                <p class="text-md text-normal color-dark">{{ event.name }}</p>
+                <p class="text-md text-normal color-dark">N{{ event.price }}</p>
                 <div class="flex align-center">
-                  <button class="mr-2">
+                  <button
+                    class="mr-2"
+                    @click="getMatchingDecrementCountFunction(event.name)"
+                  >
                     <img src="../../../assets/img/deduct-item.svg" />
                   </button>
-                  <p class="text-md text-normal color-dark">2</p>
-                  <button class="ml-2">
-                    <img src="../../../assets/img/add-item.svg" />
-                  </button>
-                </div>
-              </div>
-              <div class="flex justify-between align-center ticket--bordered">
-                <p class="text-md text-normal color-dark">Regular</p>
-                <p class="text-md text-normal color-dark">N5000</p>
-                <div class="flex align-center">
-                  <button class="mr-2">
-                    <img src="../../../assets/img/deduct-item.svg" />
-                  </button>
-                  <p class="text-md text-normal color-dark">2</p>
-                  <button class="ml-2">
-                    <img src="../../../assets/img/add-item.svg" />
-                  </button>
-                </div>
-              </div>
-              <div class="flex justify-between align-center ticket--bordered">
-                <p class="text-md text-normal color-dark">Regular</p>
-                <p class="text-md text-normal color-dark">N5000</p>
-                <div class="flex align-center">
-                  <button class="mr-2">
-                    <img src="../../../assets/img/deduct-item.svg" />
-                  </button>
-                  <p class="text-md text-normal color-dark">2</p>
-                  <button class="ml-2">
+                  <p class="text-md text-normal color-dark"></p>
+                  <button
+                    class="ml-2"
+                    @click="getMatchingIncrementCountFunction(event.name)"
+                  >
                     <img src="../../../assets/img/add-item.svg" />
                   </button>
                 </div>
               </div>
               <p class="text-xs mt-4 color-grey--3">
-                Ticket sales ends on 22nd November 2019
+                {{ getHumanDate }}
               </p>
             </div>
           </div>
           <div class="order-summary--wrap">
             <div v-if="isNotCheckout">
-              <OrderSummary :goNext="goNext" />
+              <OrderSummary :goNext="goNext" :count="event.counts" />
             </div>
             <div v-else>
               <UserInfo :goBack="goBack" />
@@ -78,6 +62,7 @@
 import OrderSummary from "./OrderSummary";
 import UserInfo from "./UserInfo";
 import { mapActions, mapState } from "vuex";
+import { getHumanDate } from "../../utilityFunctions";
 
 export default {
   name: "EventPayment",
@@ -92,11 +77,48 @@ export default {
   },
   computed: {
     ...mapState(["event"]),
+    getHumanDate() {
+      return getHumanDate(this.event.tickets_sale_end_date);
+    },
+    getMatchingIncrementCountFunction(name) {
+      if (name === "Regular") {
+        return this.incrementRegularCount();
+      } else if (name === "VIP") {
+        return this.incrementVipCount();
+      } else {
+        return this.incrementTableCount();
+      }
+    },
+    getMatchingDecrementCountFunction(name) {
+      if (name === "Regular") {
+        return this.decrementRegularCount();
+      } else if (name === "VIP") {
+        return this.decrementVipCount();
+      } else {
+        return this.decrementTableCount();
+      }
+    },
+    getMatchingCount(name) {
+      if (name === "Regular") {
+        return this.event.count.regular;
+      } else if (name === "VIP") {
+        return this.event.count.vip;
+      } else {
+        return this.event.count.table;
+      }
+    }
   },
-  created() {
-  },
+  created() {},
   methods: {
-    ...mapActions(["fetchSingleEvent"]),
+    ...mapActions([
+      "fetchEventTickets",
+      "incrementRegularCount",
+      "incrementVipCount",
+      "incrementTableCount",
+      "decrementRegularCount",
+      "decrementVipCount",
+      "decrementTableCount",
+    ]),
     goNext() {
       this.isNotCheckout = false;
     },

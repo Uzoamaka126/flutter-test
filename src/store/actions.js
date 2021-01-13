@@ -37,7 +37,7 @@ const loadMoreEvents = async ({ commit }, end, scrollFn) => {
 };
 
 const setUserEmail = async ({ commit }, value) => {
-  commit("SET_EMAIL",  value);
+  commit("SET_EMAIL", value);
 };
 
 const fetchSingleEvent = async ({ commit }, id) => {
@@ -55,9 +55,53 @@ const fetchSingleEvent = async ({ commit }, id) => {
   }
 };
 
+const fetchEventTickets = async ({ commit }, data) => {
+  commit("GET_EVENT_TICKETS_STARTED");
+  try {
+    const response = await getCall(urls.getTickets, data);
+    if (response.data.status !== "success") {
+      commit("GET_EVENT_TICKETS_FAILED", {
+        errMsg: "Error fetching tickets",
+      });
+    }
+    commit("GET_EVENT_TICKETS_SUCCEEDED", response.data.data);
+  } catch (err) {
+    commit("GET_EVENT_TICKETS_FAILED", { errMsg: err });
+  }
+};
+
+const incrementRegularCount = async ({ commit }) => {
+  commit("INCREMENT_REGULAR_COUNT");
+};
+const incrementVipCount = async ({ commit }) => {
+  commit("INCREMENT_VIP_COUNT");
+};
+const incrementTableCount = async ({ commit }) => {
+  commit("INCREMENT_TABLE_COUNT");
+};
+const decrementRegularCount = async ({ commit }) => {
+  commit("DECREMENT_REGULAR_COUNT");
+};
+const decrementVipCount = async ({ commit }) => {
+  commit("DECREMENT_VIP_COUNT");
+};
+const decrementTableCount = async ({ commit }) => {
+  commit("DECREMENT_TABLE_COUNT");
+};
+{
+  /*  */
+}
+
 export default {
   fetchEvents,
   loadMoreEvents,
   setUserEmail,
   fetchSingleEvent,
+  fetchEventTickets,
+  incrementRegularCount,
+  incrementVipCount,
+  incrementTableCount,
+  decrementRegularCount,
+  decrementVipCount,
+  decrementTableCount,
 };
