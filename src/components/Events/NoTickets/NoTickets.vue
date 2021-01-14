@@ -19,13 +19,21 @@
                     />
                   </div>
                   <div class="mt-4 column-100">
+                    <!-- :class="{
+                        'button--primary column-100 form-loading': getOrderState === 'loading',
+                        'button--primary column-100 disabled': email === '',
+                        'button--primary column-100': !loading,
+                      }" -->
                     <button
                       to="/create-event"
-                      :class="{
-                        'button--primary column-100 form-loading': loading,
-                        'button--primary column-100 disabled': email === '',
-                        'button--primary column-100': !loading
-                      }"
+                      :class="
+                        'button--primary column-100 ' +
+                          (getOrderState === 'loading'
+                            ? 'form-loading'
+                            : email === ''
+                            ? 'disabled'
+                            : '')
+                      "
                       @click="handleSubmit"
                     >
                       CONFIRM AND SEND TICKET
@@ -44,8 +52,7 @@
 <script>
 import Header from "../../Header";
 import CustomInput from "../../Library/Input";
-import { mapActions } from "vuex";
-
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "NoTickets",
@@ -53,27 +60,34 @@ export default {
     Header,
     CustomInput,
   },
-  data: function() {
+  data () {
     return {
       email: "",
-      loading: false,
     };
   },
   model: {
     event: "change",
   },
+  computed: {
+    ...mapState(["getOrderState", "event"]),
+  },
+
   methods: {
-    ...mapActions(["setUserEmail"]),
+    ...mapActions(["setUserEmail", "getOrder"]),
     updateInput(value) {
       this.$emit("change", value);
     },
-    handleSubmit() {
-      this.loading = true;
-      this.setUserEmail(this.email);
-      setTimeout(() => {
-        this.loading = false;
+    successFunction() {
+      if (this.getOrderState === "success") {
         this.$router.push("/ticket-confirmed");
-      }, 1500);
+      }
+    },
+    handleSubmit() {
+      const payload = {
+        email: this.email,
+      };
+      this.setUserEmail(this.email);
+      this.getOrder(payload, this.successFunction);
     },
   },
 };

@@ -50,10 +50,23 @@ export default {
     state.fetchTicketsState = "failed";
     state.ticketsErrMsg = errMsg;
   },
+  GET_ORDER_STARTED(state) {
+    state.getOrderState = "loading";
+  },
+  GET_ORDER_SUCCEEDED(state) {
+    state.getOrderState = "success";
+  },
+  GET_ORDER_FAILED(state, { errMsg }) {
+    state.getOrderState = "failed";
+    state.ticketsErrMsg = errMsg;
+  },
   INCREMENT_REGULAR_COUNT(state) {
     state.event = {
       ...state.event,
-      counts: { ...state.event.counts, regular: state.event.counts.regular + 1 },
+      counts: {
+        ...state.event.counts,
+        regular: state.event.counts.regular + 1,
+      },
     };
   },
   INCREMENT_VIP_COUNT(state) {
@@ -85,5 +98,13 @@ export default {
       ...state.event,
       counts: { ...state.event.counts, table: state.event.counts.table-- },
     };
+  },
+  ADD_TO_CART(state, data) {
+    console.log(data);
+    state.cart = data;
+    //   let selectedEvent = state.event.tickets.filter((item) => {
+    //     return item.name === name;
+    //   });
+    //  selectedEvent[0].quantity = count;
   },
 };

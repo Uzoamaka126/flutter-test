@@ -70,9 +70,32 @@ const fetchEventTickets = async ({ commit }, data) => {
   }
 };
 
+const successFunction = () => {
+  this.$router.push("/ticket-confirmed");
+};
+
+const getOrder = async (context, data) => {
+  console.log(successFunction);
+  context.commit("GET_ORDER_STARTED");
+  try {
+    const response = await getCall(urls.getOrder, data);
+    if (response.data.status !== "success") {
+      context.commit("GET_ORDER_FAILED", {
+        errMsg: "An error occured. Please, try again!",
+      });
+    } else {
+      context.commit("GET_ORDER_SUCCEEDED");
+      successFunction();
+    }
+  } catch (err) {
+    context.commit("GET_ORDER_FAILED", { errMsg: err });
+  }
+};
+
 const incrementRegularCount = async ({ commit }) => {
   commit("INCREMENT_REGULAR_COUNT");
 };
+
 const incrementVipCount = async ({ commit }) => {
   commit("INCREMENT_VIP_COUNT");
 };
@@ -88,9 +111,11 @@ const decrementVipCount = async ({ commit }) => {
 const decrementTableCount = async ({ commit }) => {
   commit("DECREMENT_TABLE_COUNT");
 };
-{
-  /*  */
-}
+const setUserCart = async ({ commit }, data) => {
+  commit("ADD_TO_CART", data);
+};
+
+/*  */
 
 export default {
   fetchEvents,
@@ -104,4 +129,7 @@ export default {
   decrementRegularCount,
   decrementVipCount,
   decrementTableCount,
+  setUserCart,
+  getOrder,
+  successFunction,
 };

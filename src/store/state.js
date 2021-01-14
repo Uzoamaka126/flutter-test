@@ -5,8 +5,8 @@ const state = {
     counts: {
       regular: 0,
       vip: 0,
-      table: 0
-    }
+      table: 0,
+    },
   },
   eventsState: "initial",
   fetchEventsErrMsg: null,
@@ -17,9 +17,11 @@ const state = {
     email: "",
   },
   fetchEventState: "initial",
+  getOrderState: "initial",
   fetchEventErrMsg: null,
   fetchTicketsState: "initial",
   ticketsErrMsg: null,
+  cart: [],
 };
 
 

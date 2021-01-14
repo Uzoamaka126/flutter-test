@@ -60,6 +60,7 @@ export default {
   },
   props: {
     goNext: Function,
+    event: Object
   },
   created() {
     // this.fetchData()

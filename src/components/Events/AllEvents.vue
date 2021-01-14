@@ -29,7 +29,8 @@
                       v-bind:class="{
                         'form-loading': loadMoreState === 'loading',
                       }"
-                      @click="loadEvents($event)"
+                      :ref="pageRef"
+                      @click="loadEvents(pageRef)"
                     >
                       CONTINUE
                     </button>
@@ -46,7 +47,6 @@
 </template>
 
 <script>
-// v-show="eventsState === 'loading'"
 
 import Header from "../Header";
 import Vue from "vue";
@@ -100,12 +100,13 @@ export default {
     endEvents() {
       Vue.toasted.show("No more events");
     },
-    loadEvents: function(event) {
-      console.log(event);
-      let position = this.offset(event.target);
-      this.loadMoreEvents(this.count, this.endEvents, function scroll() {
+    loadEvents: function(pageRef) {
+      console.log(this.$refs.pageRef, pageRef);
+      // let position = this.offset(event.target);
+      let position = this.offset(this.$refs.pageRef);
+      this.loadMoreEvents(this.endEvents, function scroll() {
         window.scrollTo({ top: position.top - 140, behavior: "smooth" });
-        return this.count + 1;
+        // return this.count + 1;
       });
     },
   },
