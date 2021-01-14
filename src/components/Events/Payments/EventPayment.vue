@@ -25,9 +25,9 @@
                 <p class="text-md text-normal color-dark">N{{ item.price }}</p>
                 <div class="flex align-center">
                   <!-- @click="getMatchingDecrementCountFunction(item.name)" -->
+                    <!-- @click="getMatchingDecrementCountFunction(item)" -->
                   <button
                     class="mr-3 cursor-pointer"
-                    @click="getMatchingDecrementCountFunction(item)"
                   >
                     <img src="../../../assets/img/deduct-item.svg" />
                   </button>
@@ -36,7 +36,7 @@
                   </p>
                   <button
                     class="ml-3 cursor-pointer"
-                    @click="getMatchingIncrementCountFunction(item)"
+                    @click="addItemToCart(item.id, item, quantity)"
                   >
                     <img src="../../../assets/img/add-item.svg" />
                   </button>
@@ -80,6 +80,7 @@ export default {
   data() {
     return {
       isNotCheckout: true,
+      quantity: 0,
     };
   },
   computed: {
@@ -103,7 +104,7 @@ export default {
       "decrementRegularCount",
       "decrementVipCount",
       "decrementTableCount",
-      "setUserCart",
+      "addToCart",
     ]),
 
     goNext() {
@@ -147,23 +148,53 @@ export default {
       }
     },
 
-    getMatchingDecrementCountFunction(item) {
-      const itemArr = this.event.tickets.filter((d) => d.name === item.name);
-      if (itemArr[0].quantity === undefined) {
-        itemArr[0].quantity = 0;
-      } else {
-        itemArr[0].quantity -= 1;
-      }
-      this.setUserCart(itemArr);
+    addItemToCart(id, item, quantity) {
+      const { cart } = this;
+      let existingItem = cart.addedItems.find((item) => id === item.id);
 
-      if (item.name === "Regular") {
-        return this.decrementRegularCount();
-      } else if (name === "VIP") {
-        return this.decrementVipCount();
+      if (existingItem) {
+        let newArr = [...cart.addedItems];
+        const objIndex = newArr.findIndex((obj) => obj.id === id);
+
+        newArr[objIndex]["quantity"] = quantity;
+
+        this.addToCart({
+          ...cart,
+          addedItems: newArr,
+          total: cart.addedItems.reduce(
+            (total, obj) => obj.price * obj.quantity + total,
+            0
+          ),
+        });
       } else {
-        return this.decrementTableCount();
+        let newTotal = item.price * item.quantity;
+
+        this.addToCart({
+          ...cart,
+          addedItems: cart.addedItems.concat(item),
+          cartTotal: cart.addedItems.length + 1,
+          total: cart.total + newTotal
+        });
       }
     },
+
+    // getMatchingDecrementCountFunction(item) {
+    //   const itemArr = this.event.tickets.filter((d) => d.name === item.name);
+    //   if (itemArr[0].quantity === undefined) {
+    //     itemArr[0].quantity = 0;
+    //   } else {
+    //     itemArr[0].quantity -= 1;
+    //   }
+    //   this.setUserCart(itemArr);
+
+    //   if (item.name === "Regular") {
+    //     return this.decrementRegularCount();
+    //   } else if (name === "VIP") {
+    //     return this.decrementVipCount();
+    //   } else {
+    //     return this.decrementTableCount();
+    //   }
+    // },
 
     getCartDetails(item) {
       const payload = {

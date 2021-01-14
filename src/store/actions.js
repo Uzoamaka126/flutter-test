@@ -16,7 +16,7 @@ const fetchEvents = async ({ commit }) => {
   }
 };
 
-const loadMoreEvents = async ({ commit }, end, scrollFn) => {
+const loadMoreEvents = async ({ commit }, end) => {
   commit("LOAD_MORE_EVENTS_STARTED");
   try {
     const response = await getCall(`${urls.getEvents}?page=2&limit=18`);
@@ -30,9 +30,10 @@ const loadMoreEvents = async ({ commit }, end, scrollFn) => {
       });
     }
     commit("LOAD_MORE_EVENTS_SUCCEEDED", response.data.data.events);
-    scrollFn();
+    return true;
   } catch (err) {
     commit("LOAD_MORE_EVENTS_FAILED", { errMsg: err });
+    return false;
   }
 };
 
@@ -111,7 +112,8 @@ const decrementVipCount = async ({ commit }) => {
 const decrementTableCount = async ({ commit }) => {
   commit("DECREMENT_TABLE_COUNT");
 };
-const setUserCart = async ({ commit }, data) => {
+
+const addToCart = async ({ commit }, data) => {
   commit("ADD_TO_CART", data);
 };
 
@@ -129,7 +131,7 @@ export default {
   decrementRegularCount,
   decrementVipCount,
   decrementTableCount,
-  setUserCart,
+  addToCart,
   getOrder,
   successFunction,
 };

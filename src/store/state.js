@@ -21,8 +21,12 @@ const state = {
   fetchEventErrMsg: null,
   fetchTicketsState: "initial",
   ticketsErrMsg: null,
-  cart: [],
+  cart: {
+    items: [],
+    // addedItems: [],
+    // cartTotal: 0,
+    total: 0,
+  },
 };
 
-
-export default state
+export default state;

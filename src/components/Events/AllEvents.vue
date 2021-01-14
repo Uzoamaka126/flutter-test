@@ -75,6 +75,8 @@ export default {
   data() {
     return {
       count: 1,
+      page: 1,
+      limit: 18
     };
   },
   computed: {
@@ -85,12 +87,12 @@ export default {
       "loadMoreState",
       "loadMoreErrMsg",
     ]),
-    offset(el) {
-      var rect = el.getBoundingClientRect(),
-        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
-    },
+    // offset(el) {
+    //   var rect = el.getBoundingClientRect(),
+    //     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    //     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    //   return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+    // },
   },
   mounted: function() {
     this.fetchEvents();
@@ -100,14 +102,16 @@ export default {
     endEvents() {
       Vue.toasted.show("No more events");
     },
-    loadEvents: function(pageRef) {
+    loadEvents: async function(pageRef) {
       console.log(this.$refs.pageRef, pageRef);
       // let position = this.offset(event.target);
-      let position = this.offset(this.$refs.pageRef);
-      this.loadMoreEvents(this.endEvents, function scroll() {
-        window.scrollTo({ top: position.top - 140, behavior: "smooth" });
-        // return this.count + 1;
-      });
+      // let position = this.offset(this.$refs.pageRef);
+      const loadedEvents = await this.loadMoreEvents(this.endEvents, this.limit, this.page);
+      if(loadedEvents) {
+        // call scroll function here 
+        // increment this.page
+      }
+      
     },
   },
 };

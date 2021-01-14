@@ -101,10 +101,6 @@ export default {
   },
   ADD_TO_CART(state, data) {
     console.log(data);
-    state.cart = data;
-    //   let selectedEvent = state.event.tickets.filter((item) => {
-    //     return item.name === name;
-    //   });
-    //  selectedEvent[0].quantity = count;
+    state.cart = {...state.cart, addedItems: state.cart.addedItems.concat()};
   },
 };
