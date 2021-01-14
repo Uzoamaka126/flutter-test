@@ -1,12 +1,8 @@
 const state = {
   events: [],
   event: {
+    id: "",
     tickets: [],
-    counts: {
-      regular: 0,
-      vip: 0,
-      table: 0,
-    },
   },
   eventsState: "initial",
   fetchEventsErrMsg: null,
@@ -23,8 +19,6 @@ const state = {
   ticketsErrMsg: null,
   cart: {
     items: [],
-    // addedItems: [],
-    // cartTotal: 0,
     total: 0,
   },
 };

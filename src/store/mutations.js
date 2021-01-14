@@ -24,7 +24,6 @@ export default {
   NO_MORE_EVENTS(state) {
     state.endEventsList = "End of list";
   },
-  //
   SET_EMAIL(state, value) {
     state.userInfo = { ...state.userInfo, email: value };
   },
@@ -59,48 +58,5 @@ export default {
   GET_ORDER_FAILED(state, { errMsg }) {
     state.getOrderState = "failed";
     state.ticketsErrMsg = errMsg;
-  },
-  INCREMENT_REGULAR_COUNT(state) {
-    state.event = {
-      ...state.event,
-      counts: {
-        ...state.event.counts,
-        regular: state.event.counts.regular + 1,
-      },
-    };
-  },
-  INCREMENT_VIP_COUNT(state) {
-    state.event = {
-      ...state.event,
-      counts: { ...state.event.counts, vip: state.event.counts.vip + 1 },
-    };
-  },
-  INCREMENT_TABLE_COUNT(state) {
-    state.event = {
-      ...state.event,
-      counts: { ...state.event.counts, table: state.event.counts.table + 1 },
-    };
-  },
-  DECREMENT_REGULAR_COUNT(state) {
-    state.event = {
-      ...state.event,
-      counts: { ...state.event.counts, regular: state.event.counts.regular-- },
-    };
-  },
-  DECREMENT_VIP_COUNT(state) {
-    state.event = {
-      ...state.event,
-      counts: { ...state.event.counts, vip: state.event.counts.vip-- },
-    };
-  },
-  DECREMENT_TABLE_COUNT(state) {
-    state.event = {
-      ...state.event,
-      counts: { ...state.event.counts, table: state.event.counts.table-- },
-    };
-  },
-  ADD_TO_CART(state, data) {
-    console.log(data);
-    state.cart = {...state.cart, addedItems: state.cart.addedItems.concat()};
   },
 };

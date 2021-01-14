@@ -31,7 +31,6 @@
                       }"
                       @click="loadEvents($event)"
                     >
-                      <!-- :ref="pageRef" -->
                       CONTINUE
                     </button>
                   </div>
@@ -75,7 +74,6 @@ export default {
     return {
       count: 1,
       page: 1,
-      limit: 18,
     };
   },
   computed: {
@@ -97,7 +95,7 @@ export default {
     this.fetchAllEvents();
   },
   methods: {
-    ...mapActions(["fetchEvents", "loadMoreEvents"]),
+    ...mapActions(["fetchEvents"]),
     endEvents() {
       Vue.toasted.show("No more events");
     },
@@ -108,13 +106,9 @@ export default {
       }
     },
     loadEvents: async function($event) {
-      // console.log(this.$refs.pageRef, pageRef);
       let position = this.offset($event.target);
-      // let position = this.offset(this.$refs.pageRef);
       const loadedEvents = await this.fetchAllEvents(this.page);
       if (loadedEvents === true) {
-        // call scroll function here
-        // increment this.page
         window.scrollTo({ top: position.top - 140, behavior: "smooth" });
         this.page++;
       }

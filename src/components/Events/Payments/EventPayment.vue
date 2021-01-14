@@ -18,25 +18,24 @@
             <div class="ticket--price--wrap">
               <div
                 class="flex justify-between align-center ticket--bordered"
-                v-for="item in event.tickets"
-                :key="item.id"
+                v-for="item in booking"
+                :key="item.name"
               >
                 <p class="text-md text-normal color-dark">{{ item.name }}</p>
                 <p class="text-md text-normal color-dark">N{{ item.price }}</p>
                 <div class="flex align-center">
-                  <!-- @click="getMatchingDecrementCountFunction(item.name)" -->
-                    <!-- @click="getMatchingDecrementCountFunction(item)" -->
                   <button
                     class="mr-3 cursor-pointer"
+                    @click="updateTicket(item.name, item.count - 1, item.price)"
                   >
                     <img src="../../../assets/img/deduct-item.svg" />
                   </button>
                   <p class="text-md text-normal color-dark">
-                    {{ getMatchingCount(item.name) }}
+                    {{ item.count }}
                   </p>
                   <button
                     class="ml-3 cursor-pointer"
-                    @click="addItemToCart(item.id, item, quantity)"
+                    @click="updateTicket(item.name, item.count + 1, item.price)"
                   >
                     <img src="../../../assets/img/add-item.svg" />
                   </button>
@@ -80,11 +79,17 @@ export default {
   data() {
     return {
       isNotCheckout: true,
-      quantity: 0,
+      booking: [],
+      cart: {
+        tickets: [],
+      },
+      subTotal: 0,
+      vat: 0,
+      total: 0,
     };
   },
   computed: {
-    ...mapState(["event", "fetchTicketsState", "cart"]),
+    ...mapState(["event", "fetchTicketsState"]),
     getEndDate() {
       return getHumanDate(this.event.tickets_sale_end_date);
     },
@@ -92,19 +97,20 @@ export default {
       return getHumanDate(this.event.start_time);
     },
   },
-  mounted() {
-    this.fetchEventTickets();
+  async mounted() {
+    await this.fetchEventTickets();
+    console.log("events:", this.event);
+    this.event.tickets.map((item) => {
+      this.booking.push({
+        name: item.name,
+        price: item.price,
+        count: 0,
+      });
+    });
   },
   methods: {
     ...mapActions([
       "fetchEventTickets",
-      "incrementRegularCount",
-      "incrementVipCount",
-      "incrementTableCount",
-      "decrementRegularCount",
-      "decrementVipCount",
-      "decrementTableCount",
-      "addToCart",
     ]),
 
     goNext() {
@@ -116,111 +122,39 @@ export default {
     },
 
     close() {
-      this.$router.push(`/events/${this.event.id}`);
+      this.$router.push(`/${this.event.id}`);
     },
 
-    getMatchingCount(name) {
-      if (name === "Regular") {
-        return this.event.counts.regular;
-      } else if (name === "VIP") {
-        return this.event.counts.vip;
-      } else {
-        return this.event.counts.table;
+    updateCart(name, count, price) {
+      const isItemExist = this.cart.tickets.find((item) => {
+        if (item.name === name) {
+          item.count = count;
+          item.price = price * count;
+          return item;
+        }
+
+        return 0;
+      });
+
+      if (!isItemExist) {
+        this.cart.tickets.push({ name, count, price });
       }
+
+      this.subTotal = this.cart.tickets.reduce(
+        (initial, item) => item.price + initial,
+        0
+      );
+      // this.vat
     },
 
-    getMatchingIncrementCountFunction(item) {
-      const itemArr = this.event.tickets.filter((d) => d.name === item.name);
-      console.log(itemArr);
-      if (itemArr[0].quantity === undefined) {
-        itemArr[0].quantity = 0;
-      } else {
-        itemArr[0].quantity += 1;
-      }
-      this.setUserCart(itemArr);
-
-      if (item.name === "Regular") {
-        return this.incrementRegularCount();
-      } else if (name === "VIP") {
-        return this.incrementVipCount();
-      } else {
-        return this.incrementTableCount();
-      }
-    },
-
-    addItemToCart(id, item, quantity) {
-      const { cart } = this;
-      let existingItem = cart.addedItems.find((item) => id === item.id);
-
-      if (existingItem) {
-        let newArr = [...cart.addedItems];
-        const objIndex = newArr.findIndex((obj) => obj.id === id);
-
-        newArr[objIndex]["quantity"] = quantity;
-
-        this.addToCart({
-          ...cart,
-          addedItems: newArr,
-          total: cart.addedItems.reduce(
-            (total, obj) => obj.price * obj.quantity + total,
-            0
-          ),
-        });
-      } else {
-        let newTotal = item.price * item.quantity;
-
-        this.addToCart({
-          ...cart,
-          addedItems: cart.addedItems.concat(item),
-          cartTotal: cart.addedItems.length + 1,
-          total: cart.total + newTotal
-        });
-      }
-    },
-
-    // getMatchingDecrementCountFunction(item) {
-    //   const itemArr = this.event.tickets.filter((d) => d.name === item.name);
-    //   if (itemArr[0].quantity === undefined) {
-    //     itemArr[0].quantity = 0;
-    //   } else {
-    //     itemArr[0].quantity -= 1;
-    //   }
-    //   this.setUserCart(itemArr);
-
-    //   if (item.name === "Regular") {
-    //     return this.decrementRegularCount();
-    //   } else if (name === "VIP") {
-    //     return this.decrementVipCount();
-    //   } else {
-    //     return this.decrementTableCount();
-    //   }
-    // },
-
-    getCartDetails(item) {
-      const payload = {
-        name: item.name,
-        count:
-          item.name === "Regular"
-            ? this.event.counts.regular
-            : item.name === "VIP"
-            ? this.event.counts.vip
-            : this.event.counts.table,
-        price:
-          item.name === "Regular"
-            ? item.price * this.event.counts.regular
-            : item.name === "VIP"
-            ? item.price * this.event.counts.vip
-            : item.price * this.event.counts.table,
-      };
-      console.log(payload);
-      this.addToCart(payload);
-      if (name === "Regular") {
-        return this.decrementRegularCount();
-      } else if (name === "VIP") {
-        return this.decrementVipCount();
-      } else {
-        return this.decrementTableCount();
-      }
+    updateTicket(name, count, price) {
+      if (count < 0) return;
+      this.booking.find((item) => {
+        if (item.name === name) {
+          item.count = count;
+          this.updateCart(name, count, price);
+        }
+      });
     },
   },
 };

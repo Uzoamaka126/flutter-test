@@ -132,7 +132,7 @@ export default {
     this.checkForEvent();
 
     if(this.id === "undefined") {
-      this.$router.push("/events")
+      this.$router.push("/")
     }
   },
   watch: {
@@ -145,7 +145,7 @@ export default {
     ...mapActions(["fetchSingleEvent"]),
     checkForEvent() {
       if (this.event === {}) {
-        this.$router.push("/events");
+        this.$router.push("/");
       }
     },
   },

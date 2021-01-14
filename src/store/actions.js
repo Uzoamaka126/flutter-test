@@ -19,27 +19,6 @@ const fetchEvents = async ({ commit }, page) => {
   }
 };
 
-const loadMoreEvents = async ({ commit }, end) => {
-  commit("LOAD_MORE_EVENTS_STARTED");
-  try {
-    const response = await getCall(`${urls.getEvents}?page=2&limit=18`);
-    console.log(response);
-    if (response.data.data.pageInfo.currentPage === 2) {
-      commit("NO_MORE_EVENTS");
-      end();
-    } else if (response.data.status !== "success") {
-      commit("LOAD_MORE_EVENTS_FAILED", {
-        errMsg: "Error loading more events",
-      });
-    }
-    commit("LOAD_MORE_EVENTS_SUCCEEDED", response.data.data.events);
-    return true;
-  } catch (err) {
-    commit("LOAD_MORE_EVENTS_FAILED", { errMsg: err });
-    return false;
-  }
-};
-
 const setUserEmail = async ({ commit }, value) => {
   commit("SET_EMAIL", value);
 };
@@ -96,45 +75,11 @@ const getOrder = async (context, data) => {
   }
 };
 
-const incrementRegularCount = async ({ commit }) => {
-  commit("INCREMENT_REGULAR_COUNT");
-};
-
-const incrementVipCount = async ({ commit }) => {
-  commit("INCREMENT_VIP_COUNT");
-};
-const incrementTableCount = async ({ commit }) => {
-  commit("INCREMENT_TABLE_COUNT");
-};
-const decrementRegularCount = async ({ commit }) => {
-  commit("DECREMENT_REGULAR_COUNT");
-};
-const decrementVipCount = async ({ commit }) => {
-  commit("DECREMENT_VIP_COUNT");
-};
-const decrementTableCount = async ({ commit }) => {
-  commit("DECREMENT_TABLE_COUNT");
-};
-
-const addToCart = async ({ commit }, data) => {
-  commit("ADD_TO_CART", data);
-};
-
-/*  */
 
 export default {
   fetchEvents,
-  loadMoreEvents,
   setUserEmail,
   fetchSingleEvent,
   fetchEventTickets,
-  incrementRegularCount,
-  incrementVipCount,
-  incrementTableCount,
-  decrementRegularCount,
-  decrementVipCount,
-  decrementTableCount,
-  addToCart,
   getOrder,
-  successFunction,
 };
