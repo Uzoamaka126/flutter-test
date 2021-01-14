@@ -29,9 +29,9 @@
                       v-bind:class="{
                         'form-loading': loadMoreState === 'loading',
                       }"
-                      :ref="pageRef"
-                      @click="loadEvents(pageRef)"
+                      @click="loadEvents($event)"
                     >
+                      <!-- :ref="pageRef" -->
                       CONTINUE
                     </button>
                   </div>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-
 import Header from "../Header";
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
@@ -76,7 +75,7 @@ export default {
     return {
       count: 1,
       page: 1,
-      limit: 18
+      limit: 18,
     };
   },
   computed: {
@@ -87,31 +86,38 @@ export default {
       "loadMoreState",
       "loadMoreErrMsg",
     ]),
-    // offset(el) {
-    //   var rect = el.getBoundingClientRect(),
-    //     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    //     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    //   return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
-    // },
+    offset(el) {
+      var rect = el.getBoundingClientRect(),
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+    },
   },
   mounted: function() {
-    this.fetchEvents();
+    this.fetchAllEvents();
   },
   methods: {
     ...mapActions(["fetchEvents", "loadMoreEvents"]),
     endEvents() {
       Vue.toasted.show("No more events");
     },
-    loadEvents: async function(pageRef) {
-      console.log(this.$refs.pageRef, pageRef);
-      // let position = this.offset(event.target);
-      // let position = this.offset(this.$refs.pageRef);
-      const loadedEvents = await this.loadMoreEvents(this.endEvents, this.limit, this.page);
-      if(loadedEvents) {
-        // call scroll function here 
-        // increment this.page
+    fetchAllEvents: async function() {
+      const result = await this.fetchEvents(this.page);
+      if (result === true) {
+        this.page++;
       }
-      
+    },
+    loadEvents: async function($event) {
+      // console.log(this.$refs.pageRef, pageRef);
+      let position = this.offset($event.target);
+      // let position = this.offset(this.$refs.pageRef);
+      const loadedEvents = await this.fetchAllEvents(this.page);
+      if (loadedEvents === true) {
+        // call scroll function here
+        // increment this.page
+        window.scrollTo({ top: position.top - 140, behavior: "smooth" });
+        this.page++;
+      }
     },
   },
 };

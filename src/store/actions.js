@@ -1,18 +1,21 @@
 import { urls } from "../network/urls";
 import { getCall } from "../network/axiosHelpers";
 
-const fetchEvents = async ({ commit }) => {
+const fetchEvents = async ({ commit }, page) => {
   commit("FETCH_EVENTS_STARTED");
   try {
-    const response = await getCall(`${urls.getEvents}?limit=18`);
+    const response = await getCall(`${urls.getEvents}?page=${page}&limit=18`);
     if (response.data.status !== "success") {
       commit("FETCH_EVENTS_FAILED", {
         fetchEventsErrMsg: "Error loading events",
       });
+      return false;
     }
     commit("FETCH_EVENTS_SUCCEEDED", response.data.data.events);
+    return true;
   } catch (err) {
     commit("FETCH_EVENTS_FAILED", { fetchEventsErrMsg: err });
+    return false;
   }
 };
 
