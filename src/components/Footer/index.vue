@@ -1,19 +1,18 @@
 <template>
   <footer>
-    <div class="flex justify-between align-center column--100 header--wrap">
+    <div
+      class="flex justify-between align-center column--100 footer-wrap header--wrap"
+    >
       <div class="nav-brand">
-        <img src="../../assets/img/Logo.svg" alt="flutterwave logo image" />
+        <p class="color-grey--2 text-xs">Copyright 2019. Flutterwave inc</p>
       </div>
-      <div class="nav-right">
-        <router-link to="/no-tickets" class="">
-          I didn’t get my tickets
-        </router-link>
-        <router-link
-          to="/create-event"
-          class="button--primary button--primary--md"
-        >
-          CREATE YOUR OWN EVENT
-        </router-link>
+      <div class="footer-right">
+        <p class="color-grey--2 text-xs">
+          Terms & Conditions
+        </p>
+        <p class="color-grey--2 text-xs second">
+          Privacy Policy
+        </p>
       </div>
     </div>
   </footer>
@@ -24,3 +23,27 @@ export default {
   name: "Footer",
 };
 </script>
+
+<style scoped>
+footer {
+  margin-top: 130px;
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.footer-wrap {
+  padding-right: 200px;
+  padding-left: 200px;
+  max-width: 1200px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+.footer-right .second {
+  margin-left: 48px;
+}
+</style>
