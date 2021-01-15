@@ -59,4 +59,25 @@ export default {
     state.getOrderState = "failed";
     state.ticketsErrMsg = errMsg;
   },
+  CREATE_ORDER_STARTED(state) {
+    state.createOrderState = "loading";
+  },
+  CREATE_ORDER_SUCCEEDED(state) {
+    state.createOrderState = "success";
+  },
+  CREATE_ORDER_FAILED(state, { errMsg }) {
+    state.createOrderState = "failed";
+    state.createOrderErrMsg = errMsg;
+  },
+  MAKE_PAYMENT_STARTED(state) {
+    state.makePaymentState = "loading";
+  },
+  MAKE_PAYMENT_SUCCEEDED(state, link) {
+    state.makePaymentState = "success";
+    state.link = link;
+  },
+  MAKE_PAYMENT_FAILED(state, { errMsg }) {
+    state.makePaymentState = "failed";
+    state.makePaymentErrMsg = errMsg;
+  },
 };

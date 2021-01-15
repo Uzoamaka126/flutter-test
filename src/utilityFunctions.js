@@ -63,3 +63,12 @@ export const getFullDate = (isoformat) => {
   var day = days[dy]
   return day + " " + mlong + " " + d + " " + y + "," + time;
 };
+
+export const generateRandomNum = () => {
+  let text = "";
+  let possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
+  for (let i = 0; i < 15; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
+};

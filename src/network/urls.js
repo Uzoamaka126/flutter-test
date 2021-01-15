@@ -9,4 +9,5 @@ export const urls = {
   createOrder: "/orders",
   getOrder: "/orders/1",
   getTickets: "/ticket-types/events/1",
+  makePayment: "https://api.flutterwave.com/v3/payments",
 };

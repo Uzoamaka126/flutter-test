@@ -48,6 +48,7 @@
 <script>
 import CustomInput from "../../Library/Input";
 import { mapActions, mapState } from "vuex";
+import { generateRandomNum } from "../../../utilityFunctions";
 
 export default {
   name: "UserInfo",
@@ -59,13 +60,11 @@ export default {
       fullName: "",
       email: "",
       phoneNumber: "",
-      ticketType: "",
-      ticketQuantity: "",
       ticketInfo: {},
     };
   },
   model: {
-    event: "change",
+    event,
   },
   props: {
     goBack: Function,
@@ -75,29 +74,44 @@ export default {
     cart: Object,
   },
   watch: {
-    ticketInfo() {
-      this.cart.tickets.map((item) => {
-        if (item.name === "Regular") {
-          this.ticketInfo["1"] = item.count;
-        } else if (item.name === "VIP") {
-          this.ticketInfo["2"] = item.count;
-        } else {
-          this.ticketInfo["3"] = item.count;
-        }
-      });
+    cart: {
+      deep: true,
+      handler: "changeTicketInfo",
+    },
+
+    ticketInfo: {
+      immediate: true,
     },
   },
   computed: {
-    ...mapState(["event", "fetchTicketsState"]),
+    ...mapState([
+      "makePaymentErrMsg",
+      "makePaymentState",
+      "link",
+      "createOrderState",
+      "createOrderErrMsg",
+    ]),
   },
   methods: {
-    ...mapActions(["createOrder"]),
+    ...mapActions(["createOrder", "makeTicketPayment"]),
     updateInput(value) {
       this.$emit("change", value);
-      console.log(value);
     },
-    
-    createTicketOrder() {
+    changeTicketInfo() {
+      for (let item in this.cart.tickets) {
+        console.log(item, this.cart.tickets);
+        let key = this.cart.tickets[item];
+        if (key.name === "Regular") {
+          this.$set(this.ticketInfo, "1", key.count);
+        } else if (key.name === "VIP") {
+          this.ticketInfo = { ...this.ticketInfo, 2: key.count };
+          this.ticketInfo["2"] = key.count;
+        } else {
+          this.ticketInfo = { ...this.ticketInfo, 3: key.count };
+        }
+      }
+    },
+    async createTicketOrder() {
       const payload = {
         event_id: this.event.id,
         email: this.email,
@@ -107,8 +121,30 @@ export default {
         value_added_tax: this.vat,
         tickets_bought: `${this.ticketInfo}`,
       };
-      this.createOrder(payload);
+      console.log(payload);
+      const result = await this.createOrder(payload);
+      if (result) {
+        const payload = {
+          tx_ref: generateRandomNum(),
+          amount: this.total.toString(),
+          currency: "NGN",
+          payment_options: "card",
+          redirect_url: this.$router.push("/payment-confirm"),
+          customer: {
+            email: this.email,
+            phonenumber: this.phoneNumber,
+            name: this.fullName,
+          },
+          customizations: {
+            title: "Pied Piper Payments",
+            description: "Middleout is not free.Pay the price",
+            logo: "https://assets.piedpiper.com/logo.png",
+          },
+        };
+        this.makeTicketPayment(payload);
+      }
     },
+    makePayment() {},
   },
 };
 </script>

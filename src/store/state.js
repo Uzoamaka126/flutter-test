@@ -21,6 +21,11 @@ const state = {
     items: [],
     total: 0,
   },
+  createOrderState: "initial",
+  createOrderErrMsg: null,
+  makePaymentState: "initial",
+  link: "",
+  makePaymentErrMsg: ""
 };
 
 export default state;

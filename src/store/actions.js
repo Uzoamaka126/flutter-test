@@ -91,6 +91,29 @@ const createOrder = async ({ commit }, data) => {
   }
 };
 
+const makeTicketPayment = async ({ commit }, data) => {
+  commit("MAKE_PAYMENT_STARTED");
+  try {
+    const response = await postCall(urls.makePayment, data, null, {
+      Authorization: "Bearer FLWSECK_TEST-dd05895918088b4c2405ec2a84cd9435-X",
+    });
+    if (response.data.status !== "success") {
+      commit("MAKE_PAYMENT_FAILED", {
+        errMsg: "An error occured. Please, try again!",
+      });
+      return false;
+    } else {
+      commit("MAKE_PAYMENT_SUCCEEDED", response.data.data.link);
+      const link = response.data.data.link;
+      return link;
+    }
+  } catch (err) {
+    commit("MAKE_PAYMENT_FAILED", { errMsg: err });
+    return false;
+  }
+};
+
+
 export default {
   fetchEvents,
   setUserEmail,
@@ -98,4 +121,5 @@ export default {
   fetchEventTickets,
   getOrder,
   createOrder,
+  makeTicketPayment,
 };

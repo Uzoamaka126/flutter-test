@@ -19,13 +19,7 @@
                     />
                   </div>
                   <div class="mt-4 column-100">
-                    <!-- :class="{
-                        'button--primary column-100 form-loading': getOrderState === 'loading',
-                        'button--primary column-100 disabled': email === '',
-                        'button--primary column-100': !loading,
-                      }" -->
                     <button
-                      to="/create-event"
                       :class="
                         'button--primary column-100 ' +
                           (getOrderState === 'loading'
@@ -36,7 +30,9 @@
                       "
                       @click="handleSubmit"
                     >
-                      CONFIRM AND SEND TICKET
+                      <span>
+                        CONFIRM AND SEND TICKET
+                      </span>
                     </button>
                   </div>
                 </div>
