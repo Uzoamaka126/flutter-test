@@ -41,7 +41,8 @@
         </div>
       </div>
     </div>
-    <Spinner v-else />
+    <!-- <Spinner v-else /> -->
+    <PaymentSkeleton v-else />
   </div>
 </template>
 
@@ -51,7 +52,8 @@ import Footer from "../Footer";
 
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
-import Spinner from "../Library/Spinner";
+import PaymentSkeleton from '@/components/Skeletons/PaymentSkeleton'
+// import Spinner from "../Library/Spinner";
 import { mapActions, mapState } from "vuex";
 // import Toasted from "vue-toasted";
 
@@ -60,8 +62,9 @@ export default {
   components: {
     Header,
     SingleEvent,
-    Spinner,
-    Footer
+    // Spinner,
+    Footer,
+    PaymentSkeleton
   },
   data() {
     return {

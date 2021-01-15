@@ -368,7 +368,7 @@ button {
 }
 
 .page-preview {
-  margin-top: 70px;
+  /* margin-top: 70px; */
   padding: 63px 40px;
   transform: translateY(18px);
   transition: transform 0.8s;
