@@ -31,8 +31,18 @@
       </div>
     </div>
     <div class="mt-4 column-100">
-      <button to="/create-event" class="button--primary column-100">
-        CONTINUE
+      <button
+        :class="
+          'button--primary column-100 ' +
+            (createOrderState === 'loading'
+              ? 'form-loading'
+              : email === '' || fullName === '' || phoneNumber === ''
+              ? 'disabled'
+              : '')
+        "
+        @click="createTicketOrder"
+      >
+        <span>CONTINUE</span>
       </button>
     </div>
     <div class="flex mt-4">
@@ -93,10 +103,12 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions(["createOrder", "makeTicketPayment"]),
+    ...mapActions(["createOrder", "makeTicketPayment", "setUserEmail"]),
+
     updateInput(value) {
       this.$emit("change", value);
     },
+
     changeTicketInfo() {
       for (let item in this.cart.tickets) {
         console.log(item, this.cart.tickets);
@@ -111,6 +123,7 @@ export default {
         }
       }
     },
+
     async createTicketOrder() {
       const payload = {
         event_id: this.event.id,
@@ -121,7 +134,7 @@ export default {
         value_added_tax: this.vat,
         tickets_bought: `${this.ticketInfo}`,
       };
-      console.log(payload);
+      this.setUserEmail(this.email);
       const result = await this.createOrder(payload);
       if (result) {
         const payload = {

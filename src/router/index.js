@@ -10,6 +10,8 @@ const NoTickets = () => import("@/components/Events/NoTickets/NoTickets");
 const NotFound = () => import("@/components/NotFound");
 const TicketConfirmation = () =>
   import("@/components/Events/NoTickets/TicketConfirmation");
+const PaymentConfirmation = () =>
+  import("@/components/Events/Payments/PaymentConfirmation");
 
 export const router = new VueRouter({
   mode: "history",
@@ -41,6 +43,11 @@ export const router = new VueRouter({
       path: "/ticket-confirmed",
       name: "TicketConfirmation",
       component: TicketConfirmation,
+    },
+    {
+      path: "/payment-confirm",
+      name: "TicketConfirmation",
+      component: PaymentConfirmation,
     },
     { path: "/", redirect: "/events" },
   ],

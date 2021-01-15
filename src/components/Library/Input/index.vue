@@ -1,6 +1,6 @@
 <template>
   <div class="input-container">
-    <label>{{ label }}</label>
+    <label >{{ label }}</label>
     <input
       type="text"
       :value="value"
@@ -48,7 +48,7 @@ export default {
 }
 .input-container {
   width: 100%;
-  /* padding: 0.5rem 0.5rem 0 0; */
+  margin-top: 12px;
 }
 
 label {

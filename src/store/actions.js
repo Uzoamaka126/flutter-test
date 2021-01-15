@@ -1,5 +1,5 @@
 import { urls } from "../network/urls";
-import { getCall, postCall } from "../network/axiosHelpers";
+import { getCall, postCall, postCallFlutter } from "../network/axiosHelpers";
 
 const fetchEvents = async ({ commit }, page) => {
   commit("FETCH_EVENTS_STARTED");
@@ -64,7 +64,7 @@ const getOrder = async ({ commit }, data) => {
       return false;
     } else {
       commit("GET_ORDER_SUCCEEDED");
-      return true
+      return true;
     }
   } catch (err) {
     commit("GET_ORDER_FAILED", { errMsg: err });
@@ -93,10 +93,11 @@ const createOrder = async ({ commit }, data) => {
 
 const makeTicketPayment = async ({ commit }, data) => {
   commit("MAKE_PAYMENT_STARTED");
+  const headers = {
+    'Authorization': "Bearer FLWSECK_TEST-dd05895918088b4c2405ec2a84cd9435-X",
+  };
   try {
-    const response = await postCall(urls.makePayment, data, null, {
-      Authorization: "Bearer FLWSECK_TEST-dd05895918088b4c2405ec2a84cd9435-X",
-    });
+    const response = await postCallFlutter(urls.makePayment, data, headers);
     if (response.data.status !== "success") {
       commit("MAKE_PAYMENT_FAILED", {
         errMsg: "An error occured. Please, try again!",
@@ -112,7 +113,6 @@ const makeTicketPayment = async ({ commit }, data) => {
     return false;
   }
 };
-
 
 export default {
   fetchEvents,
