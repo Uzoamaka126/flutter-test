@@ -54,10 +54,18 @@
                 :subtotal="subTotal"
                 :total="total"
                 :vat="vat"
+                :event="event"
+                :btnState="isDisabled"
               />
             </div>
             <div v-else>
-              <UserInfo :goBack="goBack" />
+              <UserInfo
+                :goBack="goBack"
+                :total="total"
+                :vat="vat"
+                :event="event"
+                :cart="cart"
+              />
             </div>
           </div>
         </div>
@@ -92,6 +100,7 @@ export default {
       subTotal: 0,
       vat: 0,
       total: 0,
+      isDisabled: false,
     };
   },
   computed: {
@@ -103,9 +112,9 @@ export default {
       return getHumanDate(this.event.start_time);
     },
   },
-  async mounted() {
-    await this.fetchEventTickets();
-    console.log("events:", this.event);
+  mounted() {
+    // await this.fetchEventTickets();
+    // console.log("events:", this.event);
     this.event.tickets.map((item) => {
       this.booking.push({
         name: item.name,
@@ -113,6 +122,22 @@ export default {
         count: 0,
       });
     });
+  },
+  watch: {
+    isDisabled() {
+      if (this.event.is_free && this.event.is_sold_out === false) {
+        console.log(this.event.is_free, this.event.is_sold_out);
+        return this.isDisabled = false;
+      }
+      if (
+        this.event.is_free === false &&
+        this.event.is_sold_out === false &&
+        this.total !== 0
+      ) {
+        console.log(this.event.is_free, this.event.is_sold_out, this.total);
+        return this.isDisabled = false;
+      }
+    },
   },
   methods: {
     ...mapActions(["fetchEventTickets"]),
@@ -126,12 +151,12 @@ export default {
     },
 
     close() {
-      this.$router.push(`/${this.event.id}`);
+      this.$router.push(`/events/${this.event.id}`);
     },
 
     updateCart(name, count, price) {
       const isItemExist = this.cart.tickets.find((item) => {
-        if (item.name === name) {
+        if (item.name === name && item.price !== 0) {
           item.count = count;
           item.price = price * count;
           return item;
@@ -152,7 +177,10 @@ export default {
         (initial, item) => (3.5 * item.price) / 100 + initial,
         0
       );
-      this.total = this.cart.tickets.reduce((initial) => (this.subTotal + this.vat) + initial, 0)
+      this.total = this.cart.tickets.reduce(
+        (initial) => this.subTotal + this.vat + initial,
+        0
+      );
     },
 
     updateTicket(name, count, price) {

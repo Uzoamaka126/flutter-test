@@ -127,27 +127,19 @@ export default {
       return getFullDate(this.event.start_time);
     },
   },
-  mounted: function() {
-    this.fetchSingleEvent(this.id);
-    this.checkForEvent();
+  async mounted() {
+    await this.fetchSingleEvent(this.id);
+    await this.fetchEventTickets();
 
-    if(this.id === "undefined") {
-      this.$router.push("/")
+    if (this.id === "undefined") {
+      this.$router.push("/");
     }
   },
   watch: {
-    checkEvent() {
-      this.event, this.fetchEventState;
-    },
-    '$route': 'fetchSingleEvent',
+    $route: "fetchSingleEvent",
   },
   methods: {
-    ...mapActions(["fetchSingleEvent"]),
-    checkForEvent() {
-      if (this.event === {}) {
-        this.$router.push("/");
-      }
-    },
+    ...mapActions(["fetchSingleEvent", "fetchEventTickets"]),
   },
 };
 </script>

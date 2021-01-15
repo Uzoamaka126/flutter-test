@@ -22,10 +22,7 @@
                     </h6>
                   </div>
                   <div class="mt-4 column-100">
-                    <button
-                      to="/create-event"
-                      class="button--primary column-100"
-                    >
+                    <button class="button--primary column-100" @click="goNext">
                       BUY MORE TICKETS
                     </button>
                   </div>
@@ -53,15 +50,12 @@ export default {
       email: "",
     };
   },
-  model: {
-    event: "change",
-  },
   computed: {
     ...mapState(["userInfo"]),
   },
   methods: {
-    updateInput(value) {
-      this.$emit("change", value);
+    goNext() {
+      this.$router.push("/");
     },
   },
 };

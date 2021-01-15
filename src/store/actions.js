@@ -1,5 +1,5 @@
 import { urls } from "../network/urls";
-import { getCall } from "../network/axiosHelpers";
+import { getCall, postCall } from "../network/axiosHelpers";
 
 const fetchEvents = async ({ commit }, page) => {
   commit("FETCH_EVENTS_STARTED");
@@ -53,28 +53,43 @@ const fetchEventTickets = async ({ commit }, data) => {
   }
 };
 
-const successFunction = () => {
-  this.$router.push("/ticket-confirmed");
-};
-
-const getOrder = async (context, data) => {
-  console.log(successFunction);
-  context.commit("GET_ORDER_STARTED");
+const getOrder = async ({ commit }, data) => {
+  commit("GET_ORDER_STARTED");
   try {
     const response = await getCall(urls.getOrder, data);
     if (response.data.status !== "success") {
-      context.commit("GET_ORDER_FAILED", {
+      commit("GET_ORDER_FAILED", {
         errMsg: "An error occured. Please, try again!",
       });
+      return false;
     } else {
-      context.commit("GET_ORDER_SUCCEEDED");
-      successFunction();
+      commit("GET_ORDER_SUCCEEDED");
+      return true
     }
   } catch (err) {
-    context.commit("GET_ORDER_FAILED", { errMsg: err });
+    commit("GET_ORDER_FAILED", { errMsg: err });
+    return false;
   }
 };
 
+const createOrder = async ({ commit }, data) => {
+  commit("CREATE_ORDER_STARTED");
+  try {
+    const response = await postCall(urls.createOrder, data);
+    if (response.data.status !== "success") {
+      commit("CREATE_ORDER_FAILED", {
+        errMsg: "An error occured. Please, try again!",
+      });
+      return false;
+    } else {
+      commit("CREATE_ORDER_SUCCEEDED");
+      return true;
+    }
+  } catch (err) {
+    commit("CREATE_ORDER_FAILED", { errMsg: err });
+    return false;
+  }
+};
 
 export default {
   fetchEvents,
@@ -82,4 +97,5 @@ export default {
   fetchSingleEvent,
   fetchEventTickets,
   getOrder,
+  createOrder,
 };

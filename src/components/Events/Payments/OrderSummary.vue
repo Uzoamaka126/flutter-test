@@ -36,6 +36,7 @@
       <button
         to="/create-event"
         class="button--primary column-100"
+        :class="{ disabled: btnState }"
         v-on:click="goNext"
       >
         CONTINUE
@@ -64,13 +65,8 @@ export default {
     total: Number,
     subtotal: Number,
     vat: Number,
+    event: Object,
+    btnState: Boolean
   },
-  created() {
-    // this.fetchData()
-  },
-  //    watch: {
-  //     '$route': 'fetchData'
-  //   },
-  methods: {},
 };
 </script>

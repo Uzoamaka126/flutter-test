@@ -60,7 +60,7 @@ export default {
     Header,
     CustomInput,
   },
-  data () {
+  data() {
     return {
       email: "",
     };
@@ -77,17 +77,15 @@ export default {
     updateInput(value) {
       this.$emit("change", value);
     },
-    successFunction() {
-      if (this.getOrderState === "success") {
-        this.$router.push("/ticket-confirmed");
-      }
-    },
-    handleSubmit() {
+    async handleSubmit() {
       const payload = {
         email: this.email,
       };
       this.setUserEmail(this.email);
-      this.getOrder(payload, this.successFunction);
+      const result = await this.getOrder(payload, this.successFunction);
+      if (result) {
+        this.$router.push("/ticket-confirmed");
+      }
     },
   },
 };
