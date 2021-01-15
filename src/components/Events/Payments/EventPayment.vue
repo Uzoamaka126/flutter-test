@@ -48,7 +48,13 @@
           </div>
           <div class="order-summary--wrap">
             <div v-if="isNotCheckout">
-              <OrderSummary :goNext="goNext" :event="event" />
+              <OrderSummary
+                :goNext="goNext"
+                :cart="cart"
+                :subtotal="subTotal"
+                :total="total"
+                :vat="vat"
+              />
             </div>
             <div v-else>
               <UserInfo :goBack="goBack" />
@@ -109,9 +115,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions([
-      "fetchEventTickets",
-    ]),
+    ...mapActions(["fetchEventTickets"]),
 
     goNext() {
       this.isNotCheckout = false;
@@ -144,7 +148,11 @@ export default {
         (initial, item) => item.price + initial,
         0
       );
-      // this.vat
+      this.vat = this.cart.tickets.reduce(
+        (initial, item) => (3.5 * item.price) / 100 + initial,
+        0
+      );
+      this.total = this.cart.tickets.reduce((initial) => (this.subTotal + this.vat) + initial, 0)
     },
 
     updateTicket(name, count, price) {

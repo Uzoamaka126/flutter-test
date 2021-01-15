@@ -85,6 +85,7 @@ export default {
       "loadMoreErrMsg",
     ]),
     offset(el) {
+      console.log(el);
       var rect = el.getBoundingClientRect(),
         scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
         scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -94,6 +95,10 @@ export default {
   mounted: function() {
     this.fetchAllEvents();
   },
+  // beforeDestroy () {
+  //   this.$event.$off(this.showEventName)
+  //   events.$off(this.hideEventName)
+  // },
   methods: {
     ...mapActions(["fetchEvents"]),
     endEvents() {
@@ -102,6 +107,7 @@ export default {
     fetchAllEvents: async function() {
       const result = await this.fetchEvents(this.page);
       if (result === true) {
+        console.log(result);
         this.page++;
       }
     },

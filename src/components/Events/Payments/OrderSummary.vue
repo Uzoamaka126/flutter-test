@@ -5,30 +5,30 @@
     </h6>
     <div class="divider mt-4"></div>
     <div class="mt-5">
-      <div>
-        <div class="flex justify-between">
-          <span>2 - Regular</span>
-          <span class="color-grey">N10,000</span>
+      <div v-for="item in cart.tickets" :key="item.name">
+        <div class="flex justify-between mt-4">
+          <span>{{ item.count }} - {{ item.name }}</span>
+          <span class="color-grey">N{{ item.price }}</span>
         </div>
-        <div class="mt-4 flex justify-between">
+        <!-- <div class="mt-4 flex justify-between">
           <span>1 - VIP</span>
           <span class="color-grey">N10,000</span>
-        </div>
+        </div> -->
       </div>
     </div>
     <div>
       <div class="order-total">
         <div class="flex justify-between">
-          <span>Sub-total</span>
-          <span class="color-grey">N110,000</span>
+          <span class="text-xs">Sub-total</span>
+          <span class="color-grey text-xs">N{{ subtotal }}</span>
         </div>
         <div class="mt-4 flex justify-between">
-          <span class="text-capitalize text-sm">VAT</span>
-          <span class="color-grey">N10,000</span>
+          <span class="text-capitalize text-xs">VAT</span>
+          <span class="color-grey text-xs">N{{ vat }}</span>
         </div>
         <div class="mt-4 flex justify-between">
-          <span class="text-capitalize text-sm">Total payment</span>
-          <span class="color-grey text-md text-semi--bold">N10,000</span>
+          <span class="text-capitalize text-xs">Total payment</span>
+          <span class="color-grey text-md text-semi--bold">N{{ total }}</span>
         </div>
       </div>
     </div>
@@ -60,7 +60,10 @@ export default {
   },
   props: {
     goNext: Function,
-    event: Object
+    cart: Object,
+    total: Number,
+    subtotal: Number,
+    vat: Number,
   },
   created() {
     // this.fetchData()
