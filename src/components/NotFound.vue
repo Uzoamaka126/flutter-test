@@ -5,10 +5,10 @@
         <div class="page-preview container">
           <div class="fadeInUp animated">
             <h1 class="color-dark mb">
-              Oops! Looks like you are on the wrong page
+              Oops! Looks like you are on the wrong page.
             </h1>
             <router-link to="/" class="color-primary">
-              Go back to home
+              Go back to homepage
             </router-link>
           </div>
         </div>
