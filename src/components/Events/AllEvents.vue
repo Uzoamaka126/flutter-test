@@ -29,7 +29,6 @@
                       v-bind:class="{
                         'form-loading': loadMoreState === 'loading',
                       }"
-                      @click="loadEvents($event)"
                     >
                       LOAD MORE
                     </button>
@@ -101,7 +100,6 @@ export default {
     fetchAllEvents: async function() {
       const result = await this.fetchEvents(this.page);
       if (result === true) {
-        console.log(result);
         this.page++;
       }
     },
