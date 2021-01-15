@@ -4,7 +4,9 @@ import { getCall, postCall, postCallFlutter } from "../network/axiosHelpers";
 const fetchEvents = async ({ commit }, page) => {
   commit("FETCH_EVENTS_STARTED");
   try {
-    const response = await getCall(`${urls.getEvents}?page=${page}&limit=18`);
+    const response = await getCall(
+      `https://eventsflw.herokuapp.com/v1/events?page=${page}&limit=18`
+    );
     if (response.data.status !== "success") {
       commit("FETCH_EVENTS_FAILED", {
         fetchEventsErrMsg: "Error loading events",
@@ -26,7 +28,9 @@ const setUserEmail = async ({ commit }, value) => {
 const fetchSingleEvent = async ({ commit }, id) => {
   commit("GET_SINGLE_EVENT_STARTED");
   try {
-    const response = await getCall(`${urls.getSingleEvent}/${id}`);
+    const response = await getCall(
+      `https://eventsflw.herokuapp.com/v1/events/${id}`
+    );
     if (response.data.status !== "success") {
       commit("GET_SINGLE_EVENT_FAILED", {
         errMsg: "Error fetching event",
@@ -41,7 +45,10 @@ const fetchSingleEvent = async ({ commit }, id) => {
 const fetchEventTickets = async ({ commit }, data) => {
   commit("GET_EVENT_TICKETS_STARTED");
   try {
-    const response = await getCall(urls.getTickets, data);
+    const response = await getCall(
+      "https://eventsflw.herokuapp.com/v1/ticket-types/events/1",
+      data
+    );
     if (response.data.status !== "success") {
       commit("GET_EVENT_TICKETS_FAILED", {
         errMsg: "Error fetching tickets",
@@ -56,7 +63,10 @@ const fetchEventTickets = async ({ commit }, data) => {
 const getOrder = async ({ commit }, data) => {
   commit("GET_ORDER_STARTED");
   try {
-    const response = await getCall(urls.getOrder, data);
+    const response = await getCall(
+      "https://eventsflw.herokuapp.com/v1/orders/1",
+      data
+    );
     if (response.data.status !== "success") {
       commit("GET_ORDER_FAILED", {
         errMsg: "An error occured. Please, try again!",
@@ -75,7 +85,10 @@ const getOrder = async ({ commit }, data) => {
 const createOrder = async ({ commit }, data) => {
   commit("CREATE_ORDER_STARTED");
   try {
-    const response = await postCall(urls.createOrder, data);
+    const response = await postCall(
+      "https://eventsflw.herokuapp.com/v1/orders",
+      data
+    );
     if (response.data.status !== "success") {
       commit("CREATE_ORDER_FAILED", {
         errMsg: "An error occured. Please, try again!",
@@ -94,7 +107,7 @@ const createOrder = async ({ commit }, data) => {
 const makeTicketPayment = async ({ commit }, data) => {
   commit("MAKE_PAYMENT_STARTED");
   const headers = {
-    'Authorization': "Bearer FLWSECK_TEST-dd05895918088b4c2405ec2a84cd9435-X",
+    Authorization: "Bearer FLWSECK_TEST-dd05895918088b4c2405ec2a84cd9435-X",
   };
   try {
     const response = await postCallFlutter(urls.makePayment, data, headers);

@@ -55,7 +55,7 @@ export const getCall = async (url, data, params, headers) => {
     data: data,
     params: params,
     headers: headers,
-    baseURL: `${process.env.VUE_APP_BASE_URL}`,
+    // baseURL: `${process.env.VUE_APP_BASE_URL}`,
   }).catch((error) => {
     if (error.toString().includes("Network Error")) {
       // Handle Network Error
