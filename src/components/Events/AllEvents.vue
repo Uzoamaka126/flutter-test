@@ -43,7 +43,7 @@
       </div>
     </div>
     <!-- <Spinner v-else /> -->
-    <PaymentSkeleton v-else />
+    <HomeSkeleton v-else />
   </div>
 </template>
 
@@ -53,7 +53,7 @@ import Footer from "../Footer";
 
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
-import PaymentSkeleton from "@/components/Skeletons/PaymentSkeleton";
+import HomeSkeleton from "@/components/Skeletons/Home";
 // import Spinner from "../Library/Spinner";
 import { mapActions, mapState } from "vuex";
 // import Toasted from "vue-toasted";
@@ -65,7 +65,7 @@ export default {
     SingleEvent,
     // Spinner,
     Footer,
-    PaymentSkeleton,
+    HomeSkeleton,
   },
   data() {
     return {
@@ -90,7 +90,7 @@ export default {
     },
   },
   mounted: function() {
-    this.fetchAllEvents();
+    // this.fetchAllEvents();
   },
   // beforeDestroy () {
   //   this.$event.$off(this.showEventName)

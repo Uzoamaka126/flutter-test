@@ -58,7 +58,7 @@
 <script>
 import { Skeleton } from "vue-loading-skeleton";
 export default {
-  name: "EventPayment",
+  name: "HomeSkeleton",
   components: {
     Skeleton,
   },

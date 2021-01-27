@@ -78,7 +78,7 @@
 <script>
 import OrderSummary from "./OrderSummary";
 import UserInfo from "./UserInfo";
-import PaymentSkeleton from "../../Skeletons/PaymentSkeleton";
+import PaymentSkeleton from "../../Skeletons/EventPayment";
 
 import { mapActions, mapState } from "vuex";
 import { getHumanDate } from "../../../utilityFunctions";
