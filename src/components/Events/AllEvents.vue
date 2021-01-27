@@ -27,7 +27,7 @@
                       to="/create-event"
                       class="button--primary button--secondary"
                       v-bind:class="{
-                        'form-loading': loadMoreState === 'loading',
+                        'form-loading-alt': loadMoreState === 'loading',
                       }"
                       @click="loadMoreEvents(page)"
                     >
@@ -90,12 +90,8 @@ export default {
     },
   },
   mounted: function() {
-    // this.fetchAllEvents();
+    this.fetchAllEvents();
   },
-  // beforeDestroy () {
-  //   this.$event.$off(this.showEventName)
-  //   events.$off(this.hideEventName)
-  // },
   methods: {
     ...mapActions(["fetchEvents", "loadMoreEvents"]),
     endEvents() {
