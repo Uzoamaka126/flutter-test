@@ -194,6 +194,7 @@ button {
   justify-content: center;
   cursor: pointer;
   background: var(--primaryColor);
+  font-weight: 700;
   color: var(--whiteColor);
   height: 50px;
   transition: transform 0.6s;
@@ -205,7 +206,8 @@ button {
 
 /* Loading Events */
 
-.form-loading, .form-loading-alt {
+.form-loading,
+.form-loading-alt {
   position: relative;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -220,7 +222,8 @@ button {
   pointer-events: none;
 }
 
-.form-loading span, .form-loading-alt span {
+.form-loading span,
+.form-loading-alt span {
   opacity: 0;
   visibility: hidden;
 }
@@ -229,7 +232,8 @@ button {
   pointer-events: none;
 }
 
-.form-loading:after, .form-loading-alt::after  {
+.form-loading:after,
+.form-loading-alt::after {
   position: absolute;
   content: "";
   width: 30px;
@@ -243,7 +247,6 @@ button {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='margin: auto; background: transparent; display: block; shape-rendering: auto;' width='200px' height='200px' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'%3E%3Ccircle cx='50' cy='50' fill='none' stroke='%23f5a623' stroke-width='10' r='35' stroke-dasharray='164.93361431346415 56.97787143782138'%3E%3CanimateTransform attributeName='transform' type='rotate' repeatCount='indefinite' dur='1s' values='0 50 50;360 50 50' keyTimes='0;1'%3E%3C/animateTransform%3E%3C/circle%3E%3C/svg%3E");
 }
 
-
 .button--secondary {
   background: var(--bodyColor);
   border: 1px solid var(--primaryColor);
@@ -255,6 +258,10 @@ button {
 .button--primary--md:hover,
 .button-round:hover {
   transform: translate3d(0px, -3px, 0px);
+}
+
+.button--primary:hover {
+  background: #eca021;
 }
 
 .button--primary--md {
@@ -637,9 +644,9 @@ button {
   min-height: 100vh;
 }
 .order-total {
-  margin-top: 150px;
+  /* margin-top: 150px; */
   padding-top: 34px;
-  border-top: 1px solid #bdbdbd;
+  /* border-top: 1px solid #bdbdbd; */
 }
 
 /* No Tickets */
@@ -656,4 +663,10 @@ button {
 }
 .ticket-input--wrap {
   max-width: 386px;
+}
+
+.confirm-logo {
+  width: 115px;
+  height: 115px;
+  margin: 20px auto 50px;
 }

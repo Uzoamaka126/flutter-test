@@ -14,7 +14,7 @@
                   <div
                     class="ticket-input--wrap pt-5 flex justify-center flex-column mt-2"
                   >
-                    <img src="../../../assets/img/check-circle.svg" />
+                    <img class="confirm-logo" src="../../../assets/img/check-circle.svg" />
                     <h6 class="text-normal">
                       Your order is being processed. We'll send a confirmation to your
                       email as soon as possible.
