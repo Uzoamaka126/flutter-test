@@ -21,6 +21,26 @@ const fetchEvents = async ({ commit }, page) => {
   }
 };
 
+const loadMoreEvents = async ({ commit }, page) => {
+  commit("LOAD_MORE_EVENTS_STARTED");
+  try {
+    const response = await getCall(
+      `https://eventsflw.herokuapp.com/v1/events?page=${page}&limit=18`
+    );
+    if (response.data.status !== "success") {
+      commit("LOAD_MORE_EVENTS_FAILED", {
+        fetchEventsErrMsg: "Error loading events",
+      });
+      return false;
+    }
+    commit("LOAD_MORE_EVENTS_SUCCEEDED", response.data.data.events);
+    return true;
+  } catch (err) {
+    commit("LOAD_MORE_EVENTS_FAILED", { fetchEventsErrMsg: err });
+    return false;
+  }
+};
+
 const setUserEmail = async ({ commit }, value) => {
   commit("SET_EMAIL", value);
 };
@@ -135,4 +155,5 @@ export default {
   getOrder,
   createOrder,
   makeTicketPayment,
+  loadMoreEvents,
 };

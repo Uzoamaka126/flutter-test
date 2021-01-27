@@ -11,16 +11,16 @@
                   <h1 class="color-dark text-xlbold">
                     The best events happening now.
                   </h1>
-                  <div class="card-single--event mt-5">
-                    <router-link
-                      v-for="item in events"
-                      :key="item.id"
-                      exact
-                      class="card-event"
-                      :to="`events/${item.id}`"
-                    >
-                      <SingleEvent v-bind:event="item" v-bind:key="item.id" />
-                    </router-link>
+                  <div class="event-list--wrap">
+                    <ul class="events-list mt-5">
+                      <li
+                        class="events-list--item"
+                        v-for="item in events"
+                        :key="item.id"
+                      >
+                        <SingleEvent v-bind:event="item" v-bind:key="item.id" />
+                      </li>
+                    </ul>
                   </div>
                   <div class="mt-5 flex align-center justify-center">
                     <button
@@ -29,8 +29,9 @@
                       v-bind:class="{
                         'form-loading': loadMoreState === 'loading',
                       }"
+                      @click="loadMoreEvents(page)"
                     >
-                      LOAD MORE
+                      <span>LOAD MORE</span>
                     </button>
                   </div>
                 </div>
@@ -52,7 +53,7 @@ import Footer from "../Footer";
 
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
-import PaymentSkeleton from '@/components/Skeletons/PaymentSkeleton'
+import PaymentSkeleton from "@/components/Skeletons/PaymentSkeleton";
 // import Spinner from "../Library/Spinner";
 import { mapActions, mapState } from "vuex";
 // import Toasted from "vue-toasted";
@@ -64,7 +65,7 @@ export default {
     SingleEvent,
     // Spinner,
     Footer,
-    PaymentSkeleton
+    PaymentSkeleton,
   },
   data() {
     return {
@@ -96,7 +97,7 @@ export default {
   //   events.$off(this.hideEventName)
   // },
   methods: {
-    ...mapActions(["fetchEvents"]),
+    ...mapActions(["fetchEvents", "loadMoreEvents"]),
     endEvents() {
       Vue.toasted.show("No more events");
     },

@@ -16,7 +16,9 @@
       <p class="color-grey text-capitalize text-xxs">
         {{ getHumanDate }}
       </p>
-      <h6 class="text-bold color-dark">{{ event.name }}</h6>
+      <router-link exact class="card-event" :to="`events/${event.id}`">
+        <h6 class="text-bold color-dark">{{ event.name }}</h6>
+      </router-link>
       <p
         class="text-normal"
         :class="{
