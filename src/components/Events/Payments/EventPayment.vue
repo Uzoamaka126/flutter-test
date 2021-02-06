@@ -21,10 +21,14 @@
                 v-for="item in booking"
                 :key="item.name"
               >
-                <p class="text-md text-normal color-dark ticket-title">{{ item.name }}</p>
-               <div class="ticket-price">
-                  <p class="text-md text-normal color-dark">N{{ item.price }}</p>
-               </div>
+                <p class="text-md text-normal color-dark ticket-title">
+                  {{ item.name }}
+                </p>
+                <div class="ticket-price">
+                  <p class="text-md text-normal color-dark">
+                    N{{ item.price }}
+                  </p>
+                </div>
                 <div class="flex align-center">
                   <button
                     class="mr-3 cursor-pointer"
@@ -72,7 +76,7 @@
           </div>
         </div>
       </div>
-      <PaymentSkeleton v-else />
+      <Loader v-else />
     </div>
   </div>
 </template>
@@ -80,7 +84,7 @@
 <script>
 import OrderSummary from "./OrderSummary";
 import UserInfo from "./UserInfo";
-import PaymentSkeleton from "../../Skeletons/EventPayment";
+import Loader from "../../Library/Loader";
 
 import { mapActions, mapState } from "vuex";
 import { getHumanDate } from "../../../utilityFunctions";
@@ -90,7 +94,7 @@ export default {
   components: {
     OrderSummary,
     UserInfo,
-    PaymentSkeleton,
+    Loader,
   },
   data() {
     return {
@@ -103,41 +107,45 @@ export default {
       vat: 0,
       total: 0,
       isDisabled: false,
+      eventInfo: {},
     };
   },
   computed: {
     ...mapState(["event", "fetchTicketsState"]),
     getEndDate() {
-      return getHumanDate(this.event.tickets_sale_end_date);
+      return getHumanDate(this.eventInfo.tickets_sale_end_date);
     },
     getStartDate() {
-      return getHumanDate(this.event.start_time);
+      return getHumanDate(this.eventInfo.start_time);
     },
   },
+  created() {
+    localStorage.setItem("paymentInfo", JSON.stringify(this.event));
+    this.eventInfo = JSON.parse(localStorage.getItem("paymentInfo"))
+  },
   mounted() {
-    // await this.fetchEventTickets();
-    // console.log("events:", this.event);
-    this.event.tickets.map((item) => {
+    this.eventInfo.tickets.map((item) => {
       this.booking.push({
         name: item.name,
         price: item.price,
         count: 0,
       });
     });
+    // if (this.eventInfo.id === "") {
+    //   this.$router.push("/events");
+    // }
   },
   watch: {
     isDisabled() {
-      if (this.event.is_free && this.event.is_sold_out === false) {
-        console.log(this.event.is_free, this.event.is_sold_out);
-        return this.isDisabled = false;
+      if (this.eventInfo.is_free && this.eventInfo.is_sold_out === false) {
+        return (this.isDisabled = false);
       }
       if (
-        this.event.is_free === false &&
-        this.event.is_sold_out === false &&
+        this.eventInfo.is_free === false &&
+        this.eventInfo.is_sold_out === false &&
         this.total !== 0
       ) {
-        console.log(this.event.is_free, this.event.is_sold_out, this.total);
-        return this.isDisabled = false;
+        return (this.isDisabled = false);
       }
     },
   },
@@ -194,6 +202,9 @@ export default {
         }
       });
     },
+  },
+  beforeDesdetroy() {
+    localStorage.removeItem("paymentInfo");
   },
 };
 </script>

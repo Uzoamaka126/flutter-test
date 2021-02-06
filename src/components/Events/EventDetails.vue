@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loader v-if="fetchEventState === 'loading'" />
-    <div v-if="fetchEventState === 'success'">
+    <div v-else-if="fetchEventState === 'success'">
       <Header />
       <div class="page-entry page--transition">
         <div class="page-entry--wrap">
@@ -90,17 +90,20 @@
                   </div>
                 </div>
               </div>
+              <Footer />
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+    <div v-else></div>
   </div>
 </template>
 
 <script>
 import Header from "../Header";
+import Footer from "../Footer";
+
 import { mapActions, mapState } from "vuex";
 import Loader from "../Library/Loader";
 import { getFullDate, getHumanDate } from "../../utilityFunctions";
@@ -110,14 +113,21 @@ export default {
   components: {
     Header,
     Loader,
+    Footer,
   },
   data: function() {
     return {
-      id: this.$route.params.id,
+      id: 0,
+      eventDetails: {},
+      eventDataInLocalStorage: JSON.parse(localStorage.getItem("singleEvent")),
     };
   },
   beforeMount: function() {
     window.scrollTo(0, 0);
+  },
+  created() {
+    this.id = this.$route.params.id;
+    this.handleFetchEvent();
   },
   computed: {
     ...mapState(["event", "fetchEventState", "fetchEventErrMsg"]),
@@ -128,19 +138,28 @@ export default {
       return getFullDate(this.event.start_time);
     },
   },
-  async mounted() {
-    await this.fetchSingleEvent(this.id);
-    await this.fetchEventTickets();
-
-    if (this.id === "undefined") {
-      this.$router.push("/");
+  mounted() {
+    if (this.id === "undefined" || this.id === 0) {
+      this.$router.push("/events");
     }
+    let eventObj = JSON.parse(localStorage.getItem("singleEvent"));
+    this.eventDetails = eventObj;
   },
   watch: {
     $route: "fetchSingleEvent",
   },
   methods: {
     ...mapActions(["fetchSingleEvent", "fetchEventTickets"]),
+    async handleFetchEvent() {
+      const result = await this.fetchSingleEvent(this.id);
+      if (result) {
+        localStorage.setItem("singleEvent", JSON.stringify(this.event));
+      }
+      await this.fetchEventTickets();
+    },
+  },
+  beforeDestroy() {
+    localStorage.removeItem("singleEvent");
   },
 };
 </script>

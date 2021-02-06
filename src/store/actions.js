@@ -55,10 +55,14 @@ const fetchSingleEvent = async ({ commit }, id) => {
       commit("GET_SINGLE_EVENT_FAILED", {
         errMsg: "Error fetching event",
       });
+      return false;
+    } else {
+      commit("GET_SINGLE_EVENT_SUCCEEDED", response.data.data);
+      return true;
     }
-    commit("GET_SINGLE_EVENT_SUCCEEDED", response.data.data);
   } catch (err) {
     commit("GET_SINGLE_EVENT_FAILED", { errMsg: err });
+    return false;
   }
 };
 

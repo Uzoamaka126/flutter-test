@@ -40,13 +40,6 @@
   </div>
 </template>
 
-// createdAt: "2020-04-30T10:51:37.000Z" // description: "For rappers" //
-end_time: "2020-08-21T00:00:00.000Z" // id: 1 // image: null // is_free: false
-// is_sold_out: false // name: "Lyricist Lounge" // num_of_tickets: 10000 //
-social_links: (...) // start_time: "2020-08-21T00:00:00.000Z" // tags: (...) //
-tickets_sale_end_date: "2020-08-21T00:00:00.000Z" // updatedAt:
-"2020-04-30T10:51:37.000Z"
-
 <script>
 import { getHumanDate } from "../../utilityFunctions";
 export default {
@@ -57,14 +50,6 @@ export default {
   data() {
     return {};
   },
-  // created() {
-  //
-  // },
-  // watch: {
-  //   // $route(to, from) {
-  //   //   // react to route changes...
-  //   // }
-  // },
   computed: {
     username() {
       return this.$route.params.title;
@@ -73,11 +58,5 @@ export default {
       return getHumanDate(this.event.start_time);
     },
   },
-  // methods: {
-  //   // a computed getter
-  //   reversedMessage() {
-  //     console.log("jjj:", this.event);
-  //   },
-  // },
 };
 </script>

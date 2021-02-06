@@ -15,10 +15,12 @@
                   <div class="event-list--wrap">
                     <ul class="events-list mt-5">
                       <li
-                        class="events-list--item"
+                        class="events-list--item cursor-pointer"
                         v-for="item in events"
                         :key="item.id"
+                        @click="goTo(item.id)"
                       >
+                      <!-- <router-link :to="{ name: 'Page2', params: { id: 1234 } }">Navigate to Page2</router-link> -->
                         <SingleEvent v-bind:event="item" v-bind:key="item.id" />
                       </li>
                     </ul>
@@ -54,7 +56,6 @@ import Footer from "../Footer";
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
 import Loader from "../Library/Loader";
-// import Spinner from "../Library/Spinner";
 import { mapActions, mapState } from "vuex";
 // import Toasted from "vue-toasted";
 
@@ -111,6 +112,9 @@ export default {
         this.page++;
       }
     },
+    goTo(id) {
+     this.$router.push(`/events/${id}`)
+    }
   },
 };
 </script>
