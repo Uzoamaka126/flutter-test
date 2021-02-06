@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Loader v-if="eventsState === 'loading'" />
     <div v-if="eventsState === 'success'">
       <Header />
       <div class="page-entry page--transition">
@@ -42,8 +43,7 @@
         </div>
       </div>
     </div>
-    <!-- <Spinner v-else /> -->
-    <HomeSkeleton v-else />
+    
   </div>
 </template>
 
@@ -53,7 +53,7 @@ import Footer from "../Footer";
 
 import Vue from "vue";
 import SingleEvent from "./SingleEventCard";
-import HomeSkeleton from "@/components/Skeletons/Home";
+import Loader from "../Library/Loader";
 // import Spinner from "../Library/Spinner";
 import { mapActions, mapState } from "vuex";
 // import Toasted from "vue-toasted";
@@ -65,7 +65,7 @@ export default {
     SingleEvent,
     // Spinner,
     Footer,
-    HomeSkeleton,
+    Loader,
   },
   data() {
     return {

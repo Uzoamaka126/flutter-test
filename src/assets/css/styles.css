@@ -52,7 +52,6 @@ a {
 }
 
 input {
-  /* Remove First */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -204,7 +203,7 @@ button {
   -o-border-radius: 4px;
 }
 
-/* Loading Events */
+/******* Loading Events *******/
 
 .form-loading,
 .form-loading-alt {
@@ -260,10 +259,18 @@ button {
   transform: translate3d(0px, -3px, 0px);
 }
 
+.button--secondary:hover {
+  color: #fff;
+  background: var(--primaryColor);
+}
+
 .button--primary:hover {
   background: #eca021;
 }
 
+.button-ghost:hover {
+  color: #eca021;
+}
 .button--primary--md {
   font-size: 12.2px;
   padding: 5px 14px !important;
@@ -380,7 +387,6 @@ button {
 }
 
 .page-preview {
-  /* margin-top: 70px; */
   padding: 63px 40px;
   transform: translateY(18px);
   transition: transform 0.8s;
@@ -507,7 +513,6 @@ button {
 /* EVENT */
 .events-list {
   width: 100%;
-  /* justify-content: space-evenly; */
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -623,8 +628,6 @@ button {
   width: 60%;
   padding-right: 100px;
   padding-left: 100px;
-  /* margin-right: auto; */
-  /* margin-left: auto; */
 }
 .ticket--price--wrap {
   margin-top: 80px;
@@ -644,9 +647,15 @@ button {
   min-height: 100vh;
 }
 .order-total {
-  /* margin-top: 150px; */
   padding-top: 34px;
-  /* border-top: 1px solid #bdbdbd; */
+}
+
+.ticket-price {
+  width: 100px;
+}
+
+.ticket-title {
+  width: 150px;
 }
 
 /* No Tickets */

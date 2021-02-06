@@ -24,9 +24,9 @@
     />
     <div>
       <div class="order-total">
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 flex justify-between align-center">
           <span class="text-capitalize text-sm">Total payment</span>
-          <span class="color-grey text-md text-semi--bold">N10,000</span>
+          <span class="color-grey text-md text-semi--bold">N{{ total }}</span>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
         <span>CONTINUE</span>
       </button>
     </div>
-    <div class="flex mt-4">
+    <div class="flex mt-4 align-center">
       <span class="mr-2"><img src="../../../assets/img/guarantee.svg"/></span>
       <div>
         <p class="color-dark">100% customer protection</p>

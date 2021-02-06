@@ -21,8 +21,10 @@
                 v-for="item in booking"
                 :key="item.name"
               >
-                <p class="text-md text-normal color-dark">{{ item.name }}</p>
-                <p class="text-md text-normal color-dark">N{{ item.price }}</p>
+                <p class="text-md text-normal color-dark ticket-title">{{ item.name }}</p>
+               <div class="ticket-price">
+                  <p class="text-md text-normal color-dark">N{{ item.price }}</p>
+               </div>
                 <div class="flex align-center">
                   <button
                     class="mr-3 cursor-pointer"

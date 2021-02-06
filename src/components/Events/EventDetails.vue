@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Loader v-if="fetchEventState === 'loading'" />
     <div v-if="fetchEventState === 'success'">
       <Header />
       <div class="page-entry page--transition">
@@ -94,21 +95,21 @@
         </div>
       </div>
     </div>
-    <Spinner v-show="fetchEventState === 'loading'" />
+    
   </div>
 </template>
 
 <script>
 import Header from "../Header";
 import { mapActions, mapState } from "vuex";
-import Spinner from "../Library/Spinner";
+import Loader from "../Library/Loader";
 import { getFullDate, getHumanDate } from "../../utilityFunctions";
 
 export default {
   name: "EventDetails",
   components: {
     Header,
-    Spinner,
+    Loader,
   },
   data: function() {
     return {

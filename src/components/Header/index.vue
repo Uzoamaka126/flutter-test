@@ -6,7 +6,7 @@
          <img src="../../assets/img/Logo.svg" alt="flutterwave logo image" />
         </router-link>      
       </div>
-      <div class="nav-right">
+      <div class="nav-right button-ghost">
         <router-link to="/no-tickets" class="">
           I didn’t get my tickets
         </router-link>
