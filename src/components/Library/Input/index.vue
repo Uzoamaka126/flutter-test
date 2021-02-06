@@ -41,7 +41,6 @@ export default {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   color: #555;
-  /* width: 100%; */
   outline: none;
   padding: 15px 5px;
   margin-top: 12px;
@@ -64,7 +63,7 @@ label {
   width: 100%;
   margin: 1.5rem 0rem 1.5rem 0;
   position: relative;
-} /* necessary to give position: relative to parent. */
+}
 
 .input__hint {
   float: left;
